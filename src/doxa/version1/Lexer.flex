@@ -1,7 +1,12 @@
 package doxa.version1;
 
-// esta é a classe do CUP que usamos no lugar da classe Token
-// já para o lugar da classe TokenType, o CUP gera a classe TokenType
+/* 	Projeto Versão 1 - Compiladores
+	
+		Alunos
+	---------------
+	Ikaro Alef
+	Kenedy Felipe
+*/
 
 %%
 
@@ -67,7 +72,6 @@ var { return new Token(TokenType.VAR); }
 . { 
     // Casa com qualquer caracter que não casar com as expressoes anteriores.
     System.out.println("Illegal character : " + yytext());
-    return new Token(TokenType.error);
 }
 
 <<EOF>> {
