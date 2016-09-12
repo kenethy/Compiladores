@@ -69,9 +69,14 @@ var { return new Token(TokenType.VAR); }
 {inteiro}+  { return new Token(TokenType.INT_LITERAL, yytext()); }
 {reais}+  { return new Token(TokenType.FLOAT_LITERAL, yytext()); }
 
+"**" [^\n]* {return new Token(TokenType.COMENT); }
+">>" 
+
 . { 
     // Casa com qualquer caracter que não casar com as expressoes anteriores.
     System.out.println("Illegal character : " + yytext());
+	System.out.println("Line: " + yyline);
+	System.out.println("Column: " + yycolumn);
 }
 
 <<EOF>> {
