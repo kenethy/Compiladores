@@ -15,6 +15,6 @@ public enum TokenType {
 	INT_LITERAL,
 	FLOAT_LITERAL,
 	CHAR_LITERAL,
-	COMENT,
+	COMENTARIO,
 	EOF
 }
