@@ -3,6 +3,7 @@ package doxa.version1.tests;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Scanner;
 
 import doxa.version1.Parser;
 
@@ -18,7 +19,10 @@ public class TestParser {
 		System.out.println(" == TESTE DO PARSER ==\n");
 		
 		//TESTA O PARSER USANDO UMA STRING:		
-		String codigo = "24 + (69 * 90);";
+		Scanner sc = new Scanner(System.in);
+		//String codigo = "var x, y - int; var jota - char;\n var xis - float;";
+		while(true){
+		String codigo = sc.nextLine();
 		System.out.println(" Texto fonte a ser reconhecido: \"" + codigo + "\"");		
 		
 		entrada = new ByteArrayInputStream(codigo.getBytes());
@@ -30,6 +34,7 @@ public class TestParser {
 		System.out.println(" >>" + msg + "\n");
 		
 		System.out.println(" == FIM ==");
+		}
 	}
 	
 }
