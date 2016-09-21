@@ -29,7 +29,7 @@ public class TestLexer {
 		//lexer.reset(new FileInputStream("caminho do arquivo"));
 		
 		do {
-			token = lexer.yylex();
+			token = lexer.nextToken();
 			System.out.println("\t" + token);
 		
 		} while (!token.equals(sym.PT_VIRG));
