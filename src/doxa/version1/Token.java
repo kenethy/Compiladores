@@ -9,6 +9,8 @@ package doxa.version1;
 public class Token {
 	private TokenType tipo;
 	private String lexema;
+	private int linha;
+	private int coluna;
 
 	public Token(TokenType tipo) {
 		this.tipo = tipo;

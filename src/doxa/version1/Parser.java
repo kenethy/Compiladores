@@ -58,7 +58,7 @@ public class Parser {
 			currentToken = lexer.nextToken();
 
 		} else {
-			throw new CompilerException("Token inesperado: " + "foi lido um \"" + currentToken.getType()
+			throw new CompilerException("Token inesperado: " + "foi lido um \"" + currentToken.getType() //COLOCAR AKI OS ATRIBUTOS LINHA E COLUNA VINDOS DA CLASSE Token
 					+ "\", quando o esperado era \"" + tp + "\".");
 		}
 
@@ -148,8 +148,8 @@ public class Parser {
 	 * A seguinte produção gera problemas para nossa técnica: 
 	 * decl_funcao = "proc" nome_args "-" tipo bloco | "proc" nome_args bloco
 	 * 
-	 * Foi corrigida da seguinte forma: <decl_funcao> ::= "proc" <nome_args>
-	 * <resto_funcao> <resto_funcao> ::= "-" <tipo> <bloco> | <bloco>
+	 * Foi corrigida da seguinte forma: <decl_funcao> ::= "proc" <nome_args> <resto_funcao> 
+	 * 									<resto_funcao> ::= "-" <tipo> <bloco> | <bloco>
 	 * 
 	 * @throws CompilerException
 	 * @throws IOException
@@ -215,9 +215,137 @@ public class Parser {
 		} else
 			parseBloco();
 	}
-
+	
+	/**
+	 * <bloco> ::= "{" <lista_comandos> "}"
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
 	private void parseBloco() throws CompilerException, IOException {
-
+		acceptToken(TokenType.ABRE_CHAVES);
+		parseLista_comandos();
+		acceptToken(TokenType.FECHA_CHAVES);
+	}
+	
+	/** 
+	 * <lista_comandos> :== (<comando>)*
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseLista_comandos() throws CompilerException, IOException {
+		while (this.currentToken.getType() == TokenType.IDENTIFICADOR
+			|| this.currentToken.getType() == TokenType.WHILE
+			|| this.currentToken.getType() == TokenType.IF
+			|| this.currentToken.getType() == TokenType.PRNT
+			|| this.currentToken.getType() == TokenType.RETURN)
+		{
+			parseComando();
+		}
+	}
+	
+	/**
+	 * <comando> :== <decl_variavel>
+					| <atribuicao>
+					| <iteracao>
+					| <decisao>
+					| <escrita>
+					| <retorno>
+					| <bloco>
+					| <chamada_func_cmd>
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseComando() throws CompilerException, IOException {
+		if (this.currentToken.getType() == TokenType.VAR){ //DECLR_VARIAVEL
+			parseDecl_variavel(); //NÃO É NECESSARIO ACEITAR O VAR, POIS O PARSE ACEITA DIRETAMENTE
+		}else if (this.currentToken.getType() == TokenType.IDENTIFICADOR) { 
+			acceptToken();
+			if (this.currentToken.getType() == TokenType.ATRIBUICAO){ // ATRIBUIÇÃO
+				parseAtribuicao();
+			}else if (this.currentToken.getType() == TokenType.ABRE_PAR){ // CHAMADA_FUNC_CMD, o first é ABRE_PARA, POIS VEM DA PRODUÇÃO CHAMADA_FUNC
+				parseChamada_func_cmd();
+			}
+		}else if (this.currentToken.getType() == TokenType.WHILE){ //ITERAÇÃO
+			acceptToken();
+			acceptToken(TokenType.ABRE_PAR);
+			parseExpressao();
+			acceptToken(TokenType.FECHA_PAR);
+			parseComando();
+		}else if(this.currentToken.getType() == TokenType.IF){ //DECISAO
+			acceptToken();
+			acceptToken(TokenType.ABRE_PAR);
+			parseExpressao();
+			acceptToken(TokenType.FECHA_PAR);
+			parseComando();
+			parseRestoDecisao();
+		}else if (this.currentToken.getType() == TokenType.PRNT){ //ESCRITA
+			acceptToken();
+			acceptToken(TokenType.ABRE_PAR);
+			parseLista_exprs();
+			acceptToken(TokenType.FECHA_PAR);
+			acceptToken(TokenType.PT_VIRG);
+		}else if (this.currentToken.getType() == TokenType.RETURN){ //RETORNO
+			acceptToken();
+			parseExpressao();
+			acceptToken(TokenType.PT_VIRG);
+		}else if (this.currentToken.getType() == TokenType.ABRE_CHAVES){ //BLOCO
+			acceptToken();
+			parseBloco();
+		}
+	}
+	
+	/**
+	 * <restoDecisao> ::= "else" comando
+	 * 					|  PRODUÇÃO VAZIA
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseRestoDecisao() throws CompilerException, IOException{
+		if (this.currentToken.getType() == TokenType.ELSE){
+			acceptToken();
+			parseComando();
+		}else{
+			//PRODUÇÃO VAZIA = FAZ NADA
+			
+		}
+	}
+	
+	/**
+	 * <atribuicao> ::= IDENTIFICADOR ":=" <expressao> ";"
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseAtribuicao() throws CompilerException, IOException{
+		acceptToken(); 
+		parseExpressao();
+		acceptToken(TokenType.PT_VIRG);
+	}
+	
+	/**
+	 * <chamada_func_cmd> ::= <chamada_func> ";"
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseChamada_func_cmd () throws CompilerException, IOException{
+		acceptToken(); //aceita o Token ABRE_PAR
+		parseChamada_func();
+		acceptToken(TokenType.PT_VIRG);
+	}
+	
+	/**
+	 * <chamada_func> ::= IDENTIFICADOR "(" <lista_exprs> ")"
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseChamada_func () throws CompilerException, IOException{
+		parseLista_exprs();
+		acceptToken(TokenType.FECHA_PAR);
+	}
+	
+	
+	private void parseExpressao() throws CompilerException, IOException{
+		parseLista_exprs();
+		acceptToken(TokenType.FECHA_PAR);
 	}
 
 	/**
