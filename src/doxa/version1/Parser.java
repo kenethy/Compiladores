@@ -347,6 +347,11 @@ public class Parser {
 		parseLista_exprs();
 		acceptToken(TokenType.FECHA_PAR);
 	}
+	
+	private void parseLista_exprs() throws CompilerException, IOException{
+		parseLista_exprs();
+		acceptToken(TokenType.FECHA_PAR);
+	}
 
 	/**
 	 * <command> ::= <expr> ";"
