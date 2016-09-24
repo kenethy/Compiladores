@@ -268,36 +268,60 @@ public class Parser {
 				parseChamada_func_cmd();
 			}
 		}else if (this.currentToken.getType() == TokenType.WHILE){ //ITERAÇÃO
-			acceptToken();
-			acceptToken(TokenType.ABRE_PAR);
-			parseExpressao();
-			acceptToken(TokenType.FECHA_PAR);
-			parseComando();
+			parseIteracao();
 		}else if(this.currentToken.getType() == TokenType.IF){ //DECISAO
-			acceptToken();
-			acceptToken(TokenType.ABRE_PAR);
-			parseExpressao();
-			acceptToken(TokenType.FECHA_PAR);
-			parseComando();
-			parseRestoDecisao();
+			parseDecisao();
 		}else if (this.currentToken.getType() == TokenType.PRNT){ //ESCRITA
-			acceptToken();
-			acceptToken(TokenType.ABRE_PAR);
-			parseLista_exprs();
-			acceptToken(TokenType.FECHA_PAR);
-			acceptToken(TokenType.PT_VIRG);
+			parseEscrita();
 		}else if (this.currentToken.getType() == TokenType.RETURN){ //RETORNO
-			acceptToken();
-			parseExpressao();
-			acceptToken(TokenType.PT_VIRG);
+			parseRetorno();
 		}else if (this.currentToken.getType() == TokenType.ABRE_CHAVES){ //BLOCO
 			acceptToken();
 			parseBloco();
 		}
 	}
+
+	/**
+	 * <atribuicao> ::= IDENTIFICADOR ":=" <expressao> ";"
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseAtribuicao() throws CompilerException, IOException{
+		acceptToken(); 
+		parseExpressao();
+		acceptToken(TokenType.PT_VIRG);
+	}
 	
 	/**
-	 * <restoDecisao> ::= "else" comando
+	 * <iteracao> = "while" "(" <expressao> ")" <comando> 
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseIteracao() throws CompilerException, IOException{
+		acceptToken();
+		acceptToken(TokenType.ABRE_PAR);
+		parseExpressao();
+		acceptToken(TokenType.FECHA_PAR);
+		parseComando();
+	}
+	
+	/**
+	 * decisao =  "if" "(" <expressao> ")" <comando> "else" <comando>
+ 				| "if" "(" <expressao> ")" <comando>
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseDecisao() throws CompilerException, IOException{
+		acceptToken();
+		acceptToken(TokenType.ABRE_PAR);
+		parseExpressao();
+		acceptToken(TokenType.FECHA_PAR);
+		parseComando();
+		parseRestoDecisao();
+	}
+	
+	/**
+	 * <restoDecisao> ::= "else" <comando>
 	 * 					|  PRODUÇÃO VAZIA
 	 * @throws CompilerException
 	 * @throws IOException
@@ -313,12 +337,25 @@ public class Parser {
 	}
 	
 	/**
-	 * <atribuicao> ::= IDENTIFICADOR ":=" <expressao> ";"
+	 * escrita = "prnt" "(" lista_exprs ")" ";" 
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
-	private void parseAtribuicao() throws CompilerException, IOException{
-		acceptToken(); 
+	private void parseEscrita() throws CompilerException, IOException{
+		acceptToken();
+		acceptToken(TokenType.ABRE_PAR);
+		parseLista_exprs();
+		acceptToken(TokenType.FECHA_PAR);
+		acceptToken(TokenType.PT_VIRG);
+	}
+	
+	/**
+	 * <retorno> = "return" <expressao> ";" 
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	private void parseRetorno() throws CompilerException, IOException{
+		acceptToken();
 		parseExpressao();
 		acceptToken(TokenType.PT_VIRG);
 	}
@@ -339,22 +376,59 @@ public class Parser {
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
-	private void parseChamada_func () throws CompilerException, IOException{
+	private void parseChamada_func () throws CompilerException, IOException{ //Atualizar função
 		parseLista_exprs();
 		acceptToken(TokenType.FECHA_PAR);
 	}
 	
-	
+	/**
+	 * <expressao> = <expressao> "+" <expressao>
+				   | <expressao> "-" <expressao>
+				   | <expressao> "*" <expressao>
+				   | <expressao> "/" <expressao>
+				   | <expressao> "%" <expressao>
+				   | <expressao> "and" <expressao>
+				   | <expressao> "or" <expressao>
+				   | <expressao> "=" <expressao>
+				   | <expressao> "<>" <expressao>
+				   | <expressao> "<=" <expressao>
+				   | <expressao> "<" <expressao>
+				   | <expressao> ">=" <expressao>
+				   | <expressao> ">" <expressao>
+				   | <expr_basica>
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
 	private void parseExpressao() throws CompilerException, IOException{
-		parseLista_exprs();
-		acceptToken(TokenType.FECHA_PAR);
+
 	}
 	
+	/**
+	 * lista_exprs =  PRODUÇÃO VAZIA
+ 					| expressao ("," expressao)*
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
 	private void parseLista_exprs() throws CompilerException, IOException{
-		parseLista_exprs();
-		acceptToken(TokenType.FECHA_PAR);
+		
 	}
 
+	/**
+	 * <expr_basica> = "(" <expressao> ")"
+ 					| "not" <expr_basica>
+					| "-" <expr_basica>
+					| INT_LITERAL
+					| CHAR_LITERAL
+					| FLOAT_LITERAL
+					| IDENTIFICADOR
+					| <chamada_func>
+	 * @throws CompilerException
+	 * @throws IOException
+	 */
+	
+	///////////////////////////////////////////////////////////
+	////////////////////// EXEMPLOS ///////////////////////////
+	
 	/**
 	 * <command> ::= <expr> ";"
 	 */
