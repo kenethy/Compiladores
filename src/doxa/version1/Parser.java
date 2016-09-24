@@ -58,8 +58,10 @@ public class Parser {
 			currentToken = lexer.nextToken();
 
 		} else {
-			throw new CompilerException("Token inesperado: " + "foi lido um \"" + currentToken.getType() //COLOCAR AKI OS ATRIBUTOS LINHA E COLUNA VINDOS DA CLASSE Token
-					+ "\", quando o esperado era \"" + tp + "\".");
+			throw new CompilerException("Token inesperado: " + "foi lido um \"" 
+					+ currentToken.getType() + "\", quando o esperado era \"" + tp + "\"" 
+					+ ", linha: " + currentToken.getLinha() 
+					+ ", coluna: " + currentToken.getColuna() + ".");
 		}
 
 	}

@@ -12,13 +12,17 @@ public class Token {
 	private int linha;
 	private int coluna;
 
-	public Token(TokenType tipo) {
+	public Token(TokenType tipo, int linha, int coluna) {
 		this.tipo = tipo;
+		this.linha = linha;
+		this.coluna = coluna;
 	}
 	
-	public Token(TokenType tipo, String lexema) {
+	public Token(TokenType tipo, String lexema, int linha, int coluna) {
 		this.tipo = tipo;
 		this.lexema = lexema;
+		this.linha = linha;
+		this.coluna = coluna;
 	}
 	
 	public TokenType getType() {
@@ -37,5 +41,13 @@ public class Token {
 		}
 	}
 
+	public int getLinha() {
+		return linha;
+	}
+
+	public int getColuna() {
+		return coluna;
+	}
+	
 }
 

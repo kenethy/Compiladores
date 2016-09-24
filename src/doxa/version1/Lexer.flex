@@ -13,6 +13,7 @@ package doxa.version1;
 %class Lexer
 %public
 %type Token
+%function nextToken
 %line
 %column
 
@@ -30,62 +31,62 @@ caracter = ('[0-9]'|'[a-zA-Z]'|'\\n'|'\\t'|' '|'\ '|':'|'\('|'\)'|',')
 	// Nenhum token é retornado.
 }
 
-{caracter}+ { return new Token(TokenType.CHAR_LITERAL, yytext()); }
+{caracter}+ { return new Token(TokenType.CHAR_LITERAL, yytext(), yyline, yycolumn); }
 
 // Operadores Relacionais
-"<" { return new Token(TokenType.MENOR_QUE); }
-">" { return new Token(TokenType.MAIOR_QUE); }
-"<=" { return new Token(TokenType.MENOR_IGUAL); }
-">=" { return new Token(TokenType.MAIOR_IGUAL); }
-"=" { return new Token(TokenType.IGUAL); }
-"<>" { return new Token(TokenType.DIFERENTE); }
+"<" { return new Token(TokenType.MENOR_QUE, yyline, yycolumn); }
+">" { return new Token(TokenType.MAIOR_QUE, yyline, yycolumn); }
+"<=" { return new Token(TokenType.MENOR_IGUAL, yyline, yycolumn); }
+">=" { return new Token(TokenType.MAIOR_IGUAL, yyline, yycolumn); }
+"=" { return new Token(TokenType.IGUAL, yyline, yycolumn); }
+"<>" { return new Token(TokenType.DIFERENTE, yyline, yycolumn); }
 
 // Operadores Logico-Aritmeticos
-"+" { return new Token(TokenType.MAIS); }
-"-" { return new Token(TokenType.MENOS); }
-"*" { return new Token(TokenType.VEZES); }
-"/" { return new Token(TokenType.DIVISAO); }
-"%" { return new Token(TokenType.MODULO); }
-and { return new Token(TokenType.AND); }
-or { return new Token(TokenType.OR); }
-not { return new Token(TokenType.NOT); }
+"+" { return new Token(TokenType.MAIS, yyline, yycolumn); }
+"-" { return new Token(TokenType.MENOS, yyline, yycolumn); }
+"*" { return new Token(TokenType.VEZES, yyline, yycolumn); }
+"/" { return new Token(TokenType.DIVISAO, yyline, yycolumn); }
+"%" { return new Token(TokenType.MODULO, yyline, yycolumn); }
+and { return new Token(TokenType.AND, yyline, yycolumn); }
+or { return new Token(TokenType.OR, yyline, yycolumn); }
+not { return new Token(TokenType.NOT, yyline, yycolumn); }
 
 // Operador de Atribuição
-":=" { return new Token(TokenType.ATRIBUICAO); }
+":=" { return new Token(TokenType.ATRIBUICAO, yyline, yycolumn); }
 
 // Simbolos Especiais
-")" { return new Token(TokenType.FECHA_PAR); }
-"(" { return new Token(TokenType.ABRE_PAR); }
-"," { return new Token(TokenType.VIRGULA); }
-";" { return new Token(TokenType.PT_VIRG); }
-"{" { return new Token(TokenType.ABRE_CHAVES); }
-"}" { return new Token(TokenType.FECHA_CHAVES); }
+")" { return new Token(TokenType.FECHA_PAR, yyline, yycolumn); }
+"(" { return new Token(TokenType.ABRE_PAR, yyline, yycolumn); }
+"," { return new Token(TokenType.VIRGULA, yyline, yycolumn); }
+";" { return new Token(TokenType.PT_VIRG, yyline, yycolumn); }
+"{" { return new Token(TokenType.ABRE_CHAVES, yyline, yycolumn); }
+"}" { return new Token(TokenType.FECHA_CHAVES, yyline, yycolumn); }
 
 // Palavras-chave Reservadas
-if { return new Token(TokenType.IF); }
-else { return new Token(TokenType.ELSE); }
-while { return new Token(TokenType.WHILE); }
-return { return new Token(TokenType.RETURN); }
-float { return new Token(TokenType.FLOAT); }
-char { return new Token(TokenType.CHAR); }
-void { return new Token(TokenType.VOID); }
-prnt { return new Token(TokenType.PRNT); }
-int { return new Token(TokenType.INT); }
-proc { return new Token(TokenType.PROC); }
-var { return new Token(TokenType.VAR); }
+if { return new Token(TokenType.IF, yyline, yycolumn); }
+else { return new Token(TokenType.ELSE, yyline, yycolumn); }
+while { return new Token(TokenType.WHILE, yyline, yycolumn); }
+return { return new Token(TokenType.RETURN, yyline, yycolumn); }
+float { return new Token(TokenType.FLOAT, yyline, yycolumn); }
+char { return new Token(TokenType.CHAR, yyline, yycolumn); }
+void { return new Token(TokenType.VOID, yyline, yycolumn); }
+prnt { return new Token(TokenType.PRNT, yyline, yycolumn); }
+int { return new Token(TokenType.INT, yyline, yycolumn); }
+proc { return new Token(TokenType.PROC, yyline, yycolumn); }
+var { return new Token(TokenType.VAR, yyline, yycolumn); }
 
 // Identificador
-{identificador}+   { return new Token(TokenType.IDENTIFICADOR, yytext()); }
+{identificador}+   { return new Token(TokenType.IDENTIFICADOR, yytext(), yyline, yycolumn); }
 
 // Valores Inteiros Literais
-{inteiro}+  { return new Token(TokenType.INT_LITERAL, yytext()); }
+{inteiro}+  { return new Token(TokenType.INT_LITERAL, yytext(), yyline, yycolumn); }
 
 // Valores Reais (De Ponto Flutuante) Literais
-{reais}+  { return new Token(TokenType.FLOAT_LITERAL, yytext()); }
+{reais}+  { return new Token(TokenType.FLOAT_LITERAL, yytext(), yyline, yycolumn); }
 
 // Comentários
-"**" [^\n]* { return new Token(TokenType.COMENTARIO); }
-">>" [^*] ~"<<" { return new Token(TokenType.COMENTARIO); }
+"**" [^\n]* { return new Token(TokenType.COMENTARIO, yyline, yycolumn); }
+">>" [^*] ~"<<" { return new Token(TokenType.COMENTARIO, yyline, yycolumn); }
 
 . { 
     // Casa com qualquer caracter que não casar com as expressoes anteriores.
@@ -96,5 +97,5 @@ var { return new Token(TokenType.VAR); }
 
 <<EOF>> {
 	// Casa com o fim do arquivo apenas.
-	return new Token(TokenType.EOF);
+	return new Token(TokenType.EOF, yyline, yycolumn);
 }
