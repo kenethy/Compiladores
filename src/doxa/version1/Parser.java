@@ -382,19 +382,26 @@ public class Parser {
 	}
 	
 	/**
-	 * <expressao> = <expressao> "+" <expressao>
-				   | <expressao> "-" <expressao>
-				   | <expressao> "*" <expressao>
-				   | <expressao> "/" <expressao>
-				   | <expressao> "%" <expressao>
+	 * Níveis de precedência, do maior (1) para o menor (5)
+		1. not , - (menos unário)
+		2. *, /, % (resto da divisão)
+		3. +, - (menos binário)
+		4. =, <>, <, >, <=, >=
+		5. or, and	
+		
+	 * <expressao> = <expressao>  "+"  <expressao>
+				   | <expressao>  "-"  <expressao>
+				   | <expressao>  "*"  <expressao>
+				   | <expressao>  "/"  <expressao>
+				   | <expressao>  "%"  <expressao>
 				   | <expressao> "and" <expressao>
-				   | <expressao> "or" <expressao>
-				   | <expressao> "=" <expressao>
-				   | <expressao> "<>" <expressao>
-				   | <expressao> "<=" <expressao>
-				   | <expressao> "<" <expressao>
-				   | <expressao> ">=" <expressao>
-				   | <expressao> ">" <expressao>
+				   | <expressao>  "or" <expressao>
+				   | <expressao>  "="  <expressao>
+				   | <expressao>  "<>" <expressao>
+				   | <expressao>  "<=" <expressao>
+				   | <expressao>  "<"  <expressao>
+				   | <expressao>  ">=" <expressao>
+				   | <expressao>  ">"  <expressao>
 				   | <expr_basica>
 	 * @throws CompilerException
 	 * @throws IOException
@@ -482,13 +489,7 @@ public class Parser {
 			parseExprA();
 			acceptToken(TokenType.FECHA_PAR);
 
-		} else if (currentToken.getType() == TokenType.INT_LITERAL) { // LEMBRAR
-																		// DE
-																		// COLOCAR
-																		// FLOAT
-																		// E
-																		// CHAR
-																		// LITERAL
+		} else if (currentToken.getType() == TokenType.INT_LITERAL) { // LEMBRAR DE COLOCAR FLOAT E CHAR LITERAL
 			acceptToken();
 
 		} else {
