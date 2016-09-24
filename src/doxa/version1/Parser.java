@@ -7,9 +7,7 @@ import doxa.util.CompilerException;
 import doxa.version1.TokenType;
 
 /**
- * Esta classe faz (apenas) o reconhecimento sintático (parsing) da linguagem
- * Xpress-0.
- * 
+ * Esta classe faz (apenas) o reconhecimento sintático (parsing) da linguagem Doxa.
  * @author Ikaro Alef e Kenedy Felipe
  */
 public class Parser {

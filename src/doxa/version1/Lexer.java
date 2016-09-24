@@ -2,12 +2,8 @@
 
 package doxa.version1;
 
-/* 	Projeto Versão 1 - Compiladores
-	
-		Alunos
-	---------------
-	Ikaro Alef
-	Kenedy Felipe
+/**	Projeto Compiladores Linguagem Doxa
+	@author Ikaro Alef e Kenedy Felipe
 */
 
 
