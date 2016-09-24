@@ -333,7 +333,7 @@ public class Parser {
 	}
 	
 	/**
-	 * <chamada_func> ::= IDENTIFICADOR "(" <lista_exprs> ")"
+	 * <chamada_func> ::= ( IDENTIFICADOR "(" <lista_exprs> ")" )+
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
