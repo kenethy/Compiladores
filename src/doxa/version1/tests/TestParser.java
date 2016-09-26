@@ -20,8 +20,9 @@ public class TestParser {
 		
 		//TESTA O PARSER USANDO UMA STRING:		
 		Scanner sc = new Scanner(System.in);
-		//String codigo = "var x, y - int; var jota - char;\n var xis - float;";
+		
 		while(true){
+		//String codigo = "var x, y - int; var jota - char;\n var xis - float \na + b;";
 		String codigo = sc.nextLine();
 		System.out.println(" Texto fonte a ser reconhecido: \"" + codigo + "\"");		
 		
