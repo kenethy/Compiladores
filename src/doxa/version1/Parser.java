@@ -19,7 +19,7 @@ public class Parser {
 
 	/**
 	 * Metodo principal, a partir do qual é feito reconhecimento de um código
-	 * fonte em Xpress-0.
+	 * fonte em Doxa.
 	 */
 	public String parse(InputStream input) throws CompilerException {
 		String resultado;
@@ -275,7 +275,6 @@ public class Parser {
 		}else if (this.currentToken.getType() == TokenType.RETURN){ //RETORNO
 			parseRetorno();
 		}else if (this.currentToken.getType() == TokenType.ABRE_CHAVES){ //BLOCO
-			acceptToken();
 			parseBloco();
 		}
 	}
@@ -459,19 +458,15 @@ public class Parser {
 			acceptToken(TokenType.FECHA_PAR);
 			
 		} else if (currentToken.getType() == TokenType.INT_LITERAL) { 
-			System.out.print(this.currentToken);
 			acceptToken();
 
 		} else if (currentToken.getType() == TokenType.CHAR_LITERAL){
-			System.out.print(this.currentToken);
 			acceptToken();
 			
 		}  else if (currentToken.getType() == TokenType.FLOAT_LITERAL){
-			System.out.print(this.currentToken);
 			acceptToken();
 			
 		}else if (currentToken.getType() == TokenType.IDENTIFICADOR){
-			System.out.print(this.currentToken);
 			acceptToken();
 			if (currentToken.getType() == TokenType.ABRE_PAR){
 				parseChamada_func();				
@@ -509,7 +504,6 @@ public class Parser {
 		else {
 			//produção vazia
 		}
-		System.out.print(")");
 	}
 	
 	/**
