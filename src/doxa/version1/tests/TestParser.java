@@ -22,8 +22,21 @@ public class TestParser {
 		Scanner sc = new Scanner(System.in);
 		
 		while(true){
-		//String codigo = "var x, y - int; var jota - char;\n var xis - float \na + b;";
-		String codigo = sc.nextLine();
+		//String codigo = "proc main(){var n, nRebuilt - int;			n := 51423; ** numero a ser testado			>> A divisao de inteiros arredonda para baixo (em caso			de divisao inexata). Assim, numeros impares ficarao			com uma unidade a menos do que seu valor inicial. <<			nRebuilt := (n / 2) * 2;			if (n = nRebuilt)			prnt('P', 'A', 'R');			else			prnt('I', 'M', 'P', 'A', 'R');			}";
+		//String codigo = sc.nextLine();
+			String codigo = new String("proc main()"
+					+ " {"
+					+ "var n, nRebuilt - int;"
+					+ "n := 51423; ** numero a ser testado"
+					+ ">> A divisao de inteiros arredonda para baixo (em caso"
+					+ "de divisao inexata). Assim, numeros impares ficarao"
+					+ "com uma unidade a menos do que seu valor inicial. <<"
+					+ "nRebuilt := (n / 2) * 2;"
+					+ "if (n = nRebuilt)"
+					+ "prnt('P', 'A', 'R');"
+					+ "else"
+					+ "prnt('I', 'M', 'P', 'A', 'R');"
+					+ "}");
 		System.out.println(" Texto fonte a ser reconhecido: \"" + codigo + "\"");		
 		
 		entrada = new ByteArrayInputStream(codigo.getBytes());

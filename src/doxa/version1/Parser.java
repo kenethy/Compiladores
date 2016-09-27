@@ -237,7 +237,8 @@ public class Parser {
 			|| this.currentToken.getType() == TokenType.WHILE
 			|| this.currentToken.getType() == TokenType.IF
 			|| this.currentToken.getType() == TokenType.PRNT
-			|| this.currentToken.getType() == TokenType.RETURN)
+			|| this.currentToken.getType() == TokenType.RETURN
+			|| this.currentToken.getType() == TokenType.VAR)
 		{
 			parseComando();
 		}
@@ -346,7 +347,6 @@ public class Parser {
 		acceptToken(TokenType.FECHA_PAR);
 		acceptToken(TokenType.PT_VIRG);
 	}
-	
 	/**
 	 * <retorno> = "return" <expressao> ";" 
 	 * @throws CompilerException
@@ -374,7 +374,7 @@ public class Parser {
 	 * @throws IOException
 	 */
 	private void parseChamada_func () throws CompilerException, IOException{ //Atualizar função
-		acceptToken(); //aceita o Token ABRE_PAR, o token IDENTIFICADOR já foi aceito no método parseComando.
+		acceptToken(); //aceita o Token ABRE_PAR, o token IDENTIFICADOR já foi aceito no método parseComando ou no exprBasica.
 		parseLista_exprs();
 		acceptToken(TokenType.FECHA_PAR);
 		while (this.currentToken.getType() == TokenType.IDENTIFICADOR){
@@ -453,39 +453,50 @@ public class Parser {
 	 * @throws IOException
 	 */
 	private void parseExpr_Basica() throws CompilerException, IOException{
-		System.out.println("entrou no basic");
 		if (currentToken.getType() == TokenType.ABRE_PAR) {
 			acceptToken();
 			parseExpressao();
 			acceptToken(TokenType.FECHA_PAR);
-
+			
 		} else if (currentToken.getType() == TokenType.INT_LITERAL) { 
+			System.out.print(this.currentToken);
 			acceptToken();
 
 		} else if (currentToken.getType() == TokenType.CHAR_LITERAL){
+			System.out.print(this.currentToken);
 			acceptToken();
 			
 		}  else if (currentToken.getType() == TokenType.FLOAT_LITERAL){
+			System.out.print(this.currentToken);
 			acceptToken();
 			
 		}else if (currentToken.getType() == TokenType.IDENTIFICADOR){
+			System.out.print(this.currentToken);
 			acceptToken();
+			if (currentToken.getType() == TokenType.ABRE_PAR){
+				parseChamada_func();				
+			}
+		}else {
+			throw new CompilerException("Token inesperado: "
+					+ this.currentToken.getType()
+					+ ", linha: " + currentToken.getLinha() 
+					+ ", coluna: " + currentToken.getColuna() + ".");
 		}
+		
+		
 		
 	}
 	
 	/**
-	 * <exp5> ::= exp5 "or" exp4
-	 * 			| exp5 "and" exp4
-	 * 			| exp4
+	 * <exp5> ::= exp4 "or" exp5
+	 * 			| exp4 "and" exp5
+	 * 			| prod. vazia
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
-
+	
 	private void parseExp5() throws CompilerException, IOException{
-		System.out.println(this.currentToken +" entrou no 5");
 		parseExp4();
-		System.out.println(this.currentToken +" dentro do 5, passou o 4");
 		
 		if (currentToken.getType()==TokenType.OR){
 			acceptToken();
@@ -496,25 +507,24 @@ public class Parser {
 			parseExp5();
 		}
 		else {
-			parseExp4();
+			//produção vazia
 		}
+		System.out.print(")");
 	}
 	
 	/**
-	 * <exp4> ::= exp4 "=" exp3
-	 * 			| exp4 "<>" exp3
-	 * 			| exp4 "<" exp3
-	 * 			| exp4 ">" exp3
-	 * 			| exp4 "<=" exp3
-	 * 			| exp4 ">=" exp3
-	 * 			| exp3
+	 * <exp4> ::= exp3 "=" exp4
+	 * 			| exp3 "<>" exp4
+	 * 			| exp3 "<" exp4
+	 * 			| exp3 ">" exp4
+	 * 			| exp3 "<=" exp4
+	 * 			| exp3 ">=" exp4
+	 * 			| 
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
 	private void parseExp4() throws CompilerException, IOException{
-		System.out.println(this.currentToken + " entrou no 4");
 		parseExp3();
-		System.out.println(this.currentToken +" dentro do 4, passou o 3");
 		if (currentToken.getType()==TokenType.IGUAL){
 			acceptToken();
 			parseExp4();
@@ -540,36 +550,52 @@ public class Parser {
 			parseExp4();
 		}
 		else {
-			parseExp3();
+			//produção vazia
 		}	
 	}
 	
 	/**
-	 * <exp3> ::= exp3 "+" exp2
-	 * 			| exp3 "-" exp2
-	 * 			| exp2
+	 * <exp3> ::= exp2 "+" exp3
+	 * 			| exp2 "-" exp3
+	 * 			| 
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
 	private void parseExp3() throws CompilerException, IOException{
-		System.out.println(this.currentToken +" entrou no 3");
 		parseExp2();
-		System.out.println(this.currentToken +" dentro do 3, passou o 2");
+		if(this.currentToken.getType() == TokenType.MAIS){
+			acceptToken();
+			parseExp3();
+		} else if(this.currentToken.getType() == TokenType.MENOS){
+			acceptToken();
+			parseExp3();
+		}else{
+			//prod. vazia
+		}
 	}
 	
 	/**
-	 * <exp2> ::= exp2 "*" exp1
-	 * 			| exp2 "/" exp1
-	 * 			| exp2 "%" exp1
-	 * 			| exp1
+	 * <exp2> ::= exp1 "*" exp2
+	 * 			| exp1 "/" exp2
+	 * 			| exp1 "%" exp2
+	 * 			| 
 	 * @throws CompilerException
 	 * @throws IOException
 	 */
 	private void parseExp2() throws CompilerException, IOException{
-		System.out.println(this.currentToken +" entrou no 2");
 		parseExp1();
-		System.out.println(this.currentToken +" dentro do 2, passou o 1");
-		
+		if(this.currentToken.getType() == TokenType.VEZES){
+			acceptToken();
+			parseExp2();
+		}else if(this.currentToken.getType() == TokenType.DIVISAO){
+			acceptToken();
+			parseExp2();
+		}else if(this.currentToken.getType() == TokenType.MODULO){
+			acceptToken();
+			parseExp2();
+		}else {
+			
+		}
 	}
 	
 	/**
@@ -580,7 +606,6 @@ public class Parser {
 	 * @throws IOException
 	 */
 	private void parseExp1() throws CompilerException, IOException{
-		System.out.println(this.currentToken + " entrou no 1");
 		if(this.currentToken.getType() == TokenType.NOT){
 			acceptToken();
 			parseExpr_Basica();

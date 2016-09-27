@@ -81,8 +81,8 @@ var { return new Token(TokenType.VAR, yyline, yycolumn); }
 {reais}+  { return new Token(TokenType.FLOAT_LITERAL, yytext(), yyline, yycolumn); }
 
 // Comentários
-"**" [^\n]* { return new Token(TokenType.COMENTARIO, yyline, yycolumn); }
-">>" [^*] ~"<<" { return new Token(TokenType.COMENTARIO, yyline, yycolumn); }
+"**" [^\n]* {  }
+">>" [^*] ~"<<" { }
 
 . { 
     // Casa com qualquer caracter que não casar com as expressoes anteriores.
