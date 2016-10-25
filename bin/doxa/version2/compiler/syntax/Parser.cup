@@ -22,7 +22,7 @@ terminal String  INT_LITERAL;
 terminal String  FLOAT_LITERAL;
 terminal String  CHAR_LITERAL;
     
-terminal 		 KEY_IF, KEY_THEN, KEY_ELSE;
+terminal 		 KEY_IF, KEY_ELSE;
 terminal		 KEY_WHILE, KEY_RETURN;
 terminal		 KEY_INT, KEY_FLOAT, KEY_CHAR, KEY_PRINT;
 terminal 		 KEY_VAR, KEY_PROC;
