@@ -37,19 +37,19 @@ non terminal LinkedList<String>		lista_idents;
 non terminal LinkedList<String>		resto_lista_idents;
 non terminal Tipo					tipo;
 non terminal LinkedList<DeclFuncao>	decl_funcao;
-non terminal NomeComArgumentos		nome_args;
+non terminal 						nome_args;
 non terminal 						param_formais;
 non terminal 						resto_param_formais;
-non terminal Bloco					bloco;
-non terminal Comando				lista_comandos;
+non terminal 						bloco;
+non terminal 						lista_comandos;
 non terminal Comando				comando;
-non terminal Comando		        atribuicao;
-non terminal Comando				iteracao;
-non terminal Comando				decisao;
-non terminal Comando				escrita;
-non terminal Comando				chamada_func_cmd;
-non terminal Comando				retorno;
-non terminal Comando				chamada_func;
+non terminal 				        atribuicao;
+non terminal 						iteracao;
+non terminal						decisao;
+non terminal 						escrita;
+non terminal 						chamada_func_cmd;
+non terminal 						retorno;
+non terminal 						chamada_func;
 non terminal						lista_exprs;
 non terminal						resto_lista_exprs;
 non terminal Expressao 				expressao;
@@ -83,11 +83,13 @@ decl_global ::= decl_variavel
             
             
 decl_variavel ::= KEY_VAR lista_idents SUB tipo PONTO_VIRGULA
+ 
+                ;
+
+
+lista_idents ::= IDENTIFICADOR resto_lista_idents
+ 
                ;
-
-
-lista_idents ::= IDENTIFICADOR resto_lista_idents 
-             ;
 
 
 resto_lista_idents ::=  VIRGULA IDENTIFICADOR resto_lista_idents
@@ -98,19 +100,21 @@ resto_lista_idents ::=  VIRGULA IDENTIFICADOR resto_lista_idents
 
 tipo ::= KEY_INT
 			 
-		| KEY_CHAR 
+	   | KEY_CHAR 
 		
-		| KEY_FLOAT 
+	   | KEY_FLOAT 
 		
-		;
+	   ;
 		
 decl_funcao ::= KEY_PROC nome_args SUB tipo bloco
+
               | KEY_PROC nome_args bloco
+
 		      ;
 		
 nome_args ::= IDENTIFICADOR ABRE_PAR param_formais FECHA_PAR
 				
-            | IDENTIFICADOR ABRE_PAR param_formais FECHA_PAR nome_args
+            | nome_args IDENTIFICADOR ABRE_PAR param_formais FECHA_PAR   /* recursao a esquerda, para gerar repeticoes/lista sequencial */
 
             ;
              
@@ -131,12 +135,12 @@ resto_param_formais ::= VIRGULA IDENTIFICADOR SUB tipo resto_param_formais
 		
 bloco ::= ABRE_CHAVE lista_comandos FECHA_CHAVE 
 
-			;		
+		;		
 			
 		
 lista_comandos ::= lista_comandos comando
 
-				   | /*vazio*/
+				 | /*vazio*/
  
                  ;		
                  
@@ -161,40 +165,42 @@ comando  ::= decl_variavel
            
            
 atribuicao ::= IDENTIFICADOR ATRIBUICAO expressao PONTO_VIRGULA 
-               {:      :}
-				;    
+                {:      :}
+			 ;    
 				       
            
 iteracao ::= KEY_WHILE ABRE_PAR expressao FECHA_PAR comando 
 
-			; 
+  		   ; 
            
            
-decisao ::= KEY_IF expressao KEY_THEN comando KEY_ELSE comando
+decisao ::= KEY_IF ABRE_PAR expressao FECHA_PAR comando KEY_ELSE comando
 
-            | KEY_IF expressao KEY_THEN comando
+          | KEY_IF ABRE_PAR expressao FECHA_PAR comando
 
-            ;
+          ;
    
 
 escrita ::= KEY_PRINT ABRE_PAR expressao FECHA_PAR PONTO_VIRGULA 
 
-			;           
+		  ;           
 
 
 chamada_func_cmd ::= chamada_func PONTO_VIRGULA 
 
-					;
+				   ;
 
 					
 retorno ::= KEY_RETURN expressao PONTO_VIRGULA 
 
-			;
+		  ;
 
 			
-chamada_func ::= IDENTIFICADOR ABRE_PAR lista_exprs FECHA_PAR
+chamada_func ::= IDENTIFICADOR ABRE_PAR lista_exprs FECHA_PAR 
 
-				;
+               | chamada_func IDENTIFICADOR ABRE_PAR lista_exprs FECHA_PAR  /* recursao a esquerda, para gerar repeticoes/lista sequencial */
+
+			   ;
 
 			
 lista_exprs ::= expressao resto_lista_exprs
@@ -213,52 +219,51 @@ resto_lista_exprs ::= resto_lista_exprs VIRGULA expressao
 			
 expressao ::= expressao SOMA expressao
         
-        | expressao SUB expressao
+            | expressao SUB expressao
         
-        | expressao MULT expressao
+            | expressao MULT expressao
         
-        | expressao DIV expressao
+            | expressao DIV expressao
         
-        | expressao RESTO expressao
+            | expressao RESTO expressao
         
-        | expressao AND expressao
+            | expressao AND expressao
         
-        | expressao OR expressao
+        	| expressao OR expressao
         
-        | expressao IGUAL_QUE expressao
+        	| expressao IGUAL_QUE expressao
         
-        | expressao DIFERENTE_QUE expressao
+        	| expressao DIFERENTE_QUE expressao
         
-        | expressao MENOR_QUE expressao
+        	| expressao MENOR_QUE expressao
         
-        | expressao MENOR_OU_IGUAL expressao
+        	| expressao MENOR_OU_IGUAL expressao
         
-        | expressao MAIOR_OU_IGUAL expressao
+        	| expressao MAIOR_OU_IGUAL expressao
         
-        | expressao MAIOR_QUE expressao
+        	| expressao MAIOR_QUE expressao
         
-        | expr_basica
+        	| expr_basica
 
-        ;
+        	;
 
 
 expr_basica ::= ABRE_PAR expressao FECHA_PAR 
              
-         | NOT expr_basica
+   		      | NOT expr_basica
 
-         | SUB expr_basica
+         	  | SUB expr_basica
          
-         | INT_LITERAL:lexeme
-           {:  int valor = Integer.parseInt(lexeme); 
-               RESULT = new IntLiteral(valor);    :}
+        	  | INT_LITERAL:lexeme
+                {:  int valor = Integer.parseInt(lexeme); 
+                    RESULT = new IntLiteral(valor);    :}
          
-         | CHAR_LITERAL
+         	  | CHAR_LITERAL
          
-         | FLOAT_LITERAL
+         	  | FLOAT_LITERAL
          
-         | IDENTIFICADOR
+         	  | IDENTIFICADOR
          
-         | chamada_func: cf
-         	{: RESULT = cf; :}
-         ;
+         	  | chamada_func
          
+         	  ;
