@@ -1,10 +1,10 @@
-package compiler.syntax;
+package doxa.version2.compiler.syntax;
 
 import java_cup.runtime.*;
 import java.util.*;
-import compiler.tree.*;
-import compiler.tree.expression.*;
-import compiler.tree.command.*;
+import doxa.version2.compiler.tree.*;
+import doxa.version2.compiler.tree.expression.*;
+import doxa.version2.compiler.tree.command.*;
 
 /*****  Terminais (tokens) *****/
 
@@ -38,8 +38,8 @@ non terminal LinkedList<String>		resto_lista_idents;
 non terminal Tipo					tipo;
 non terminal LinkedList<DeclFuncao>	decl_funcao;
 non terminal NomeComArgumentos		nome_args;
-non terminal 						param_formais;
-non terminal 						resto_param_formais;
+non terminal LinkedList<DeclVariavel> param_formais;
+non terminal LinkedList<DeclVariavel> resto_param_formais;
 non terminal Bloco					bloco;
 non terminal 						lista_comandos;
 non terminal Comando				comando;
@@ -75,27 +75,27 @@ programa ::= programa:p decl_global:d
            ;
 
 
-decl_global ::= decl_variavel
-				 {:       :}
+decl_global ::= decl_variavel:d
+				 {:  RESULT = d; :}
               | decl_funcao
 			     {:       :}
               ;
             
             
-decl_variavel ::= KEY_VAR lista_idents:l SUB tipo PONTO_VIRGULA
- 				{:  :}
+decl_variavel ::= KEY_VAR lista_idents:li SUB tipo:t PONTO_VIRGULA
+ 				{: RESULT = new DeclVariavel(li, t); :}
                 ;
 
 
-lista_idents ::= IDENTIFICADOR resto_lista_idents
- 
+lista_idents ::= IDENTIFICADOR:str resto_lista_idents:list
+ 				{: list.addFirst(str); RESULT = list; :}
                ;
 
 
-resto_lista_idents ::=  VIRGULA IDENTIFICADOR resto_lista_idents
-
+resto_lista_idents ::=  VIRGULA IDENTIFICADOR:str resto_lista_idents:list
+					 {: list.addFirst(str); RESULT = list; :}
                      |  /* vazio */
-
+                     {: RESULT = new LinkedList<String>(); :}
                      ;
 
 tipo ::= KEY_INT
@@ -207,7 +207,7 @@ chamada_func ::= IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR
 lista_exprs ::= expressao:e resto_lista_exprs:rl	
 				{: rl.addFirst(e); RESULT = rl; :}
               | /*vazio*/
-              	{: RESULT = new LinkedList<Expressao>(); :} /* Caso onde nao possui parametros na chamada da funcao, a lista é vazia */
+              	{: RESULT = (Expressao) new LinkedList<Expressao>(); :} /* Caso onde nao possui parametros na chamada da funcao, a lista é vazia */
               ; 
 			
 			
