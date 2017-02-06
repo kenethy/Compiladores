@@ -51,7 +51,7 @@ non terminal Comando				chamada_func_cmd;
 non terminal Retorno				retorno;
 non terminal ChamadaFunc			chamada_func;
 non terminal LinkedList<Expressao>	lista_exprs;
-non terminal Expressao				resto_lista_exprs;
+non terminal LinkedList<Expressao>	resto_lista_exprs;
 non terminal Expressao 				expressao;
 non terminal Expressao 				expr_basica;
 
@@ -169,8 +169,8 @@ atribuicao ::= IDENTIFICADOR:i ATRIBUICAO expressao:e PONTO_VIRGULA
 			 ;    
 				       
            
-iteracao ::= KEY_WHILE ABRE_PAR expressao FECHA_PAR comando 
-
+iteracao ::= KEY_WHILE ABRE_PAR expressao:e FECHA_PAR comando:c 
+				{: RESULT = new Iteracao(e,c); 	:}
   		   ; 
            
            
@@ -181,8 +181,8 @@ decisao ::= KEY_IF ABRE_PAR expressao FECHA_PAR comando KEY_ELSE comando
           ;
    
 
-escrita ::= KEY_PRINT ABRE_PAR expressao FECHA_PAR PONTO_VIRGULA 
-
+escrita ::= KEY_PRINT ABRE_PAR lista_exprs:e FECHA_PAR PONTO_VIRGULA 
+			{: RESULT = new Escrita(e); 	:}
 		  ;           
 
 
@@ -191,8 +191,8 @@ chamada_func_cmd ::= chamada_func:c PONTO_VIRGULA
 				   ;
 
 					
-retorno ::= KEY_RETURN expressao PONTO_VIRGULA 
-
+retorno ::= KEY_RETURN expressao:e PONTO_VIRGULA 
+			{: RESULT = new Retorno(e); 	:}
 		  ;
 
 			
@@ -207,7 +207,7 @@ chamada_func ::= IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR
 lista_exprs ::= expressao:e resto_lista_exprs:rl	
 				{: rl.addFirst(e); RESULT = rl; :}
               | /*vazio*/
-              	{: RESULT = (Expressao) new LinkedList<Expressao>(); :} /* Caso onde nao possui parametros na chamada da funcao, a lista é vazia */
+              	{: RESULT = new LinkedList<Expressao>(); :} /* Caso onde nao possui parametros na chamada da funcao, a lista é vazia */
               ; 
 			
 			
@@ -246,7 +246,7 @@ expressao ::= expressao:e1 SOMA expressao:e2
         		{: 	RESULT = new ExprRelacional(e1, e2, "<>"); :}
         
         	| expressao:e1 MENOR_QUE expressao:e2
-        		{: 	RESULT = new ExprRelacional(e1, e2, ">"); :}
+        		{: 	RESULT = new ExprRelacional(e1, e2, "<"); :}
         
         	| expressao:e1 MENOR_OU_IGUAL expressao:e2
         		{: 	RESULT = new ExprRelacional(e1, e2, "<="); :}
