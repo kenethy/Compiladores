@@ -30,30 +30,30 @@ terminal String  KEY_VAR, KEY_PROC;
 
 /***** Nao-terminais *****/
 
-non terminal Programa				programa;
-non terminal DeclGlobal				decl_global;
-non terminal DeclVariavel			decl_variavel;
-non terminal LinkedList<String>		lista_idents;
-non terminal LinkedList<String>		resto_lista_idents;
-non terminal Tipo					tipo;
-non terminal LinkedList<DeclFuncao>	decl_funcao;
-non terminal NomeComArgumentos		nome_args;
-non terminal LinkedList<DeclVariavel> param_formais;
-non terminal LinkedList<DeclVariavel> resto_param_formais;
-non terminal Bloco					bloco;
-non terminal 						lista_comandos;
-non terminal Comando				comando;
-non terminal Atribuicao		        atribuicao;
-non terminal Iteracao				iteracao;
-non terminal Decisao				decisao;
-non terminal Escrita				escrita;
-non terminal Comando				chamada_func_cmd;
-non terminal Retorno				retorno;
-non terminal ChamadaFunc			chamada_func;
-non terminal LinkedList<Expressao>	lista_exprs;
-non terminal LinkedList<Expressao>	resto_lista_exprs;
-non terminal Expressao 				expressao;
-non terminal Expressao 				expr_basica;
+non terminal Programa					programa;
+non terminal DeclGlobal					decl_global;
+non terminal DeclVariavel				decl_variavel;
+non terminal LinkedList<String>			lista_idents;
+non terminal LinkedList<String>			resto_lista_idents;
+non terminal Tipo						tipo;
+non terminal LinkedList<DeclFuncao>		decl_funcao;
+non terminal NomeComArgumentos			nome_args;
+non terminal LinkedList<DeclVariavel> 	param_formais;
+non terminal LinkedList<DeclVariavel> 	resto_param_formais;
+non terminal Bloco						bloco;
+non terminal 							lista_comandos;
+non terminal Comando					comando;
+non terminal Atribuicao		        	atribuicao;
+non terminal Iteracao					iteracao;
+non terminal Decisao					decisao;
+non terminal Escrita					escrita;
+non terminal Comando					chamada_func_cmd;
+non terminal Retorno					retorno;
+non terminal ChamadaFunc				chamada_func;
+non terminal LinkedList<Expressao>		lista_exprs;
+non terminal LinkedList<Expressao>		resto_lista_exprs;
+non terminal Expressao 					expressao;
+non terminal Expressao 					expr_basica;
 
 
 /***** Precedencia e associatividade *****/
