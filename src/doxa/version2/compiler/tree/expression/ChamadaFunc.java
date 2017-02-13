@@ -14,10 +14,18 @@ public class ChamadaFunc implements Expressao, Comando {
 		this.listaExprs = listaExprs;
 	}
 	
+	public void addId (String id){
+		this.identificador = this.identificador + "$" + id;  
+	}
+	
+	
+	
 	@Override
 	public Boolean verificarSemantica() {
 		return null;
 	}
+	
+	
 
 	@Override
 	public Tipo getTipo() {

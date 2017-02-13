@@ -36,12 +36,12 @@ non terminal DeclVariavel				decl_variavel;
 non terminal LinkedList<String>			lista_idents;
 non terminal LinkedList<String>			resto_lista_idents;
 non terminal Tipo						tipo;
-non terminal LinkedList<DeclFuncao>		decl_funcao;
+non terminal DeclFuncao					decl_funcao;
 non terminal NomeComArgumentos			nome_args;
 non terminal LinkedList<DeclVariavel> 	param_formais;
 non terminal LinkedList<DeclVariavel> 	resto_param_formais;
 non terminal Bloco						bloco;
-non terminal 							lista_comandos;
+non terminal LinkedList<Comando>		lista_comandos;
 non terminal Comando					comando;
 non terminal Atribuicao		        	atribuicao;
 non terminal Iteracao					iteracao;
@@ -68,7 +68,7 @@ precedence left NOT;     //simbolo de maior precedencia
 /***** A gramatica *****/
 
 programa ::= programa:p decl_global:d
-			  {: p.addLast(d); RESULT = p ;  :}
+			  {: p.addLast(d); RESULT = p ;  :}     
 			 
 		   | /*vazio*/
 		      {: RESULT = new Programa();  :}
@@ -77,8 +77,8 @@ programa ::= programa:p decl_global:d
 
 decl_global ::= decl_variavel:d
 				 {:  RESULT = d; :}
-              | decl_funcao
-			     {:       :}
+              | decl_funcao:d
+			     {:  RESULT = d; :}
               ;
             
             
@@ -93,73 +93,78 @@ lista_idents ::= IDENTIFICADOR:str resto_lista_idents:list
 
 
 resto_lista_idents ::=  VIRGULA IDENTIFICADOR:str resto_lista_idents:list
-					 {: list.addFirst(str); RESULT = list; :}
+						 {: list.addFirst(str); RESULT = list; :}
                      |  /* vazio */
-                     {: RESULT = new LinkedList<String>(); :}
+                    	 {: RESULT = new LinkedList<String>(); :}
                      ;
 
-tipo ::= KEY_INT
+tipo ::= KEY_INT {: RESULT = Tipo.INT; :}
 			 
-	   | KEY_CHAR 
+	   | KEY_CHAR {: RESULT = Tipo.CHAR; :} 
 		
-	   | KEY_FLOAT 
+	   | KEY_FLOAT {: RESULT = Tipo.FLOAT; :}
 		
 	   ;
 		
-decl_funcao ::= KEY_PROC nome_args SUB tipo bloco
+decl_funcao ::= KEY_PROC nome_args:n SUB tipo:t bloco:b
+				{: RESULT = new DeclFuncao(n,t,b); :}
 
-              | KEY_PROC nome_args bloco
+              | KEY_PROC nome_args:n bloco:b
+              {: RESULT = new DeclFuncao(n,b); :}
 
 		      ;
 		
-nome_args ::= IDENTIFICADOR ABRE_PAR param_formais FECHA_PAR
+nome_args ::= IDENTIFICADOR:i ABRE_PAR param_formais:p FECHA_PAR
+				{:RESULT = new NomeComArgumentos(i,p); :}
+            | nome_args:n IDENTIFICADOR:i ABRE_PAR param_formais:p FECHA_PAR   /* recursao a esquerda, para gerar repeticoes/lista sequencial */
 				
-            | nome_args IDENTIFICADOR ABRE_PAR param_formais FECHA_PAR   /* recursao a esquerda, para gerar repeticoes/lista sequencial */
-
             ;
              
 
-param_formais ::= IDENTIFICADOR SUB tipo resto_param_formais
-
+param_formais ::= IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
+				{:DeclVariavel d= new DeclVariavel(i,t); r.addFirst(d);:}
+                
                 | /*vazio*/
-
+				{:RESULT = new LinkedList<DeclVariavel>(); :}
                 ;	
                 	
 		
-resto_param_formais ::= VIRGULA IDENTIFICADOR SUB tipo resto_param_formais
-						
+resto_param_formais ::= VIRGULA IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
+						{:DeclVariavel d= new DeclVariavel(i,t) ; r.addFirst(d); :}
                       | /*vazio*/
-
+                		{:RESULT = new LinkedList<DeclVariavel>(); :}      
                       ; 
                       		
 		
-bloco ::= ABRE_CHAVE lista_comandos FECHA_CHAVE 
-
+bloco ::= ABRE_CHAVE lista_comandos:l FECHA_CHAVE 
+			{: RESULT = new Bloco(l); 	:}
 		;		
 			
 		
-lista_comandos ::= lista_comandos comando
+lista_comandos ::= lista_comandos:l comando:c
+					{: l.addLast(c); RESULT = l; :}
 
 				 | /*vazio*/
+				 {:RESULT = new LinkedList<Comando>(); :}
  
                  ;		
                  
 		
-comando  ::= decl_variavel
+comando  ::= decl_variavel:x {: RESULT = x; 	:}
 
-           | atribuicao
+           | atribuicao:x {: RESULT = x; 	:}
 
-           | iteracao
+           | iteracao:x {: RESULT = x; 	:}
       
-           | decisao 
+           | decisao:x {: RESULT = x; 	:}
 
-           | escrita
+           | escrita:x {: RESULT = x; 	:} 
 
-           | retorno
+           | retorno:x {: RESULT = x; 	:}
 
-           | bloco
+           | bloco:x {: RESULT = x; 	:} 
 
-           | chamada_func_cmd
+           | chamada_func_cmd:x {: RESULT = x; 	:}
 
            ;
            
@@ -174,10 +179,10 @@ iteracao ::= KEY_WHILE ABRE_PAR expressao:e FECHA_PAR comando:c
   		   ; 
            
            
-decisao ::= KEY_IF ABRE_PAR expressao FECHA_PAR comando KEY_ELSE comando
-
-          | KEY_IF ABRE_PAR expressao FECHA_PAR comando
-
+decisao ::= KEY_IF ABRE_PAR expressao:e FECHA_PAR comando:c1 KEY_ELSE comando:c2
+			{: RESULT = new Decisao(e, c1, c2); 	:}
+          | KEY_IF ABRE_PAR expressao:e FECHA_PAR comando:c
+			{: RESULT = new Decisao(e, c); 	:}
           ;
    
 
@@ -199,8 +204,8 @@ retorno ::= KEY_RETURN expressao:e PONTO_VIRGULA
 chamada_func ::= IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR
 				{: 	RESULT = new ChamadaFunc(i, l);	:} 
 
-               | chamada_func:c IDENTIFICADOR ABRE_PAR lista_exprs FECHA_PAR  /* recursao a esquerda, para gerar repeticoes/lista sequencial */
-				{: 	RESULT = c;	:}
+               | chamada_func:c IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR  /* recursao a esquerda, para gerar repeticoes/lista sequencial */
+				{: 	RESULT = c; c.addId(i); 	:}
 			   ;
 
 			

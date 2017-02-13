@@ -7,6 +7,12 @@ public class DeclFuncao implements DeclGlobal {
 	private Bloco bloco;
 	private Tipo tipo;
 	
+	public DeclFuncao(NomeComArgumentos assinatura, Tipo tipo, Bloco bloco) {
+		this.nomesParams = assinatura;
+		this.bloco = bloco;
+		this.tipo = tipo;
+	}
+	
 	public DeclFuncao(NomeComArgumentos assinatura, Bloco bloco) {
 		this.nomesParams = assinatura;
 		this.bloco = bloco;
