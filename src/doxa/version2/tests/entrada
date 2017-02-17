@@ -4,7 +4,7 @@ proc main(){
 	var m - int;
 	x := 120; >> dois valores a partir dos quais <<
 	y := 640; >> sera calculado o m.d.c. <<
-	m := mdcDe(x)e(y);
+	m := mdcDe (x) e (y);
 	prnt('m', 'd', 'c', '(');
 	prnt( x );
 	prnt(',');

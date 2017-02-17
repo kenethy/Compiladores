@@ -14,7 +14,13 @@ public class Programa {
 	}
 	
 	public Boolean verificarSemantica() {
-		return null;
+		Boolean r = true;
+		for (int i =0; i < declaracoes.size(); i++ ){
+			r = declaracoes.get(i).verificarSemantica();
+			if (r == false)
+				break;
+		}
+		return r;
 	}
 	
 	public String gerarCodigoIntermediario(String filename) {

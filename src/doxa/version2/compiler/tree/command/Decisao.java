@@ -27,6 +27,10 @@ public class Decisao implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
+		this.expressao.verificarSemantica();
+		if (this.expressao.getTipo() == Tipo.BOOLEAN){
+			this.comandoIf.verificarSemantica();
+		}
 		return null;
 	}
 

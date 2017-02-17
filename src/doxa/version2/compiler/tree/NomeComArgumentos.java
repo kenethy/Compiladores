@@ -4,14 +4,24 @@ import java.util.LinkedList;
 import java.util.List;
 
 import doxa.version2.compiler.tree.command.DeclVariavel;
+import doxa.version2.compiler.tree.expression.Expressao;
 
 public class NomeComArgumentos {
-	private LinkedList<DeclVariavel> paramFormais;
+	private LinkedList<LinkedList<DeclVariavel>> listas;
 	private String identificador;
 
 	public NomeComArgumentos(String identificar, LinkedList<DeclVariavel> paramFormais) {
-		this.paramFormais = paramFormais;
+		this.listas = new LinkedList<LinkedList<DeclVariavel>>();
+		this.listas.add(paramFormais);
 		this.identificador = identificar;
+	}
+	
+	public void addId (String id){
+		this.identificador = this.identificador + "$" + id;  
+	}
+	
+	public void addParamForm(LinkedList<DeclVariavel> paramForm){
+		this.listas.add(paramForm);
 	}
 
 	public Boolean verificarSemantica() {

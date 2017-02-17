@@ -41,6 +41,8 @@ public class TestParser {
 			Symbol output = parser.parse();
 			
 			Programa p = (Programa) output.value;
+			if (p.verificarSemantica())
+				System.out.println("Semantica OK");
 			
 			System.out.println("Saida: " + p);
 		

@@ -20,7 +20,7 @@ public class ExprLogica implements Expressao {
 
 	@Override
 	public Tipo getTipo() {
-		return null;
+		return Tipo.BOOLEAN;
 	}
 
 	@Override

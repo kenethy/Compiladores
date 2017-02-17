@@ -117,7 +117,7 @@ decl_funcao ::= KEY_PROC nome_args:n SUB tipo:t bloco:b
 nome_args ::= IDENTIFICADOR:i ABRE_PAR param_formais:p FECHA_PAR
 				{:RESULT = new NomeComArgumentos(i,p); :}
             | nome_args:n IDENTIFICADOR:i ABRE_PAR param_formais:p FECHA_PAR   /* recursao a esquerda, para gerar repeticoes/lista sequencial */
-				
+				{:RESULT=n; n.addId(i); n.addParamForm(p); :}
             ;
              
 
@@ -205,9 +205,9 @@ chamada_func ::= IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR
 				{: 	RESULT = new ChamadaFunc(i, l);	:} 
 
                | chamada_func:c IDENTIFICADOR:i ABRE_PAR lista_exprs:l FECHA_PAR  /* recursao a esquerda, para gerar repeticoes/lista sequencial */
-				{: 	RESULT = c; c.addId(i); 	:}
+				{: 	RESULT = c; c.addId(i); c.addListExp(l);	:}
 			   ;
-
+			  
 			
 lista_exprs ::= expressao:e resto_lista_exprs:rl	
 				{: rl.addFirst(e); RESULT = rl; :}

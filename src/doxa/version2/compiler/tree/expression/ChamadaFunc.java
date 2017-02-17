@@ -7,24 +7,28 @@ import doxa.version2.compiler.tree.command.Comando;
 
 public class ChamadaFunc implements Expressao, Comando {
 	private String identificador;
-	private LinkedList<Expressao> listaExprs;
+	private LinkedList<LinkedList<Expressao>> listas;
+	
 
 	public ChamadaFunc(String identificador, LinkedList<Expressao> listaExprs) {
 		this.identificador = identificador;
-		this.listaExprs = listaExprs;
+		this.listas = new LinkedList<LinkedList<Expressao>>();
+		this.listas.add(listaExprs);
 	}
 	
 	public void addId (String id){
 		this.identificador = this.identificador + "$" + id;  
 	}
 	
-	
+	public void addListExp(LinkedList<Expressao> listaExpr){
+		this.listas.add(listaExpr);
+	}
+		
 	
 	@Override
 	public Boolean verificarSemantica() {
 		return null;
 	}
-	
 	
 
 	@Override
