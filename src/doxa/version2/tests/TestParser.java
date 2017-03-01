@@ -21,7 +21,7 @@ import java_cup.runtime.Symbol;
 public class TestParser {
 
 	public static void main(String args[]) throws IOException {
-		Lexer lexer;   //importem o lexer do projeto de vocês !!!
+		Lexer lexer;   
 		Parser parser;
 		
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

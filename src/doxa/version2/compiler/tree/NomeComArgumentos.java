@@ -20,6 +20,10 @@ public class NomeComArgumentos {
 		this.identificador = this.identificador + "$" + id;  
 	}
 	
+	public String getId(){
+		return this.identificador;
+	}
+	
 	public void addParamForm(LinkedList<DeclVariavel> paramForm){
 		this.listas.add(paramForm);
 	}

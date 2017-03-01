@@ -1,6 +1,7 @@
 package doxa.version2.compiler.tree;
 
 import doxa.version2.compiler.tree.command.Bloco;
+import symbolTable.SymbolTable;
 
 public class DeclFuncao implements DeclGlobal {
 	private NomeComArgumentos nomesParams;
@@ -20,7 +21,14 @@ public class DeclFuncao implements DeclGlobal {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		// verificar se ja foi  declarada
+		if (SymbolTable.getInstance().nameExists(nomesParams.getId())){
+			System.out.println("Função com mesmo nome já declarada.");
+			return false;
+		}else {
+			SymbolTable.getInstance().putGlobal(nomesParams.getId(), this);
+		}
+		return true;
 	}
 
 	@Override
