@@ -21,3 +21,13 @@ proc mdcDe(x - int)e(y - int) - int{
 		return mdcDe(y)e(x % y);
 	}
 }
+
+
+proc mdcDe(x - int)e(y - int) - int{
+
+	if (y = 0) {
+		return x;
+	} else {
+		return mdcDe(y)e(x % y);
+	}
+}

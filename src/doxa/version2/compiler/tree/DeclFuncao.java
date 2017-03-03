@@ -27,6 +27,7 @@ public class DeclFuncao implements DeclGlobal {
 			return false;
 		}else {
 			SymbolTable.getInstance().putGlobal(nomesParams.getId(), this);
+			System.out.println(nomesParams.getId());
 		}
 		return true;
 	}
