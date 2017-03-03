@@ -21,13 +21,13 @@ public class SymbolTable {
 		
 	}
 	
-	public boolean nameExistsGlobal(String name){ // retorna True se o nome existe na tabela
+	public boolean nameExistsGlobal(String name) { // retorna True se o nome existe na tabela
 		if (hmGlobal.containsKey(name))
 			return true;
 		return false;
 	}
 	
-	public boolean nameExistsLocal(String name){ // retorna True se o nome existe na tabela
+	public boolean nameExistsLocal(String name) { // retorna True se o nome existe na tabela
 		if (hmLocal.containsKey(name))
 			return true;
 		return false;

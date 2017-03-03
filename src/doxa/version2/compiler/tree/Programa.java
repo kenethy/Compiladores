@@ -12,17 +12,17 @@ public class Programa {
 	public void addLast(DeclGlobal dec) {
 		this.declaracoes.addLast(dec);
 	}
-	
+
 	public Boolean verificarSemantica() {
 		Boolean r = true;
-		for (int i =0; i < declaracoes.size(); i++ ){
+		for (int i = 0; i < declaracoes.size(); i++) {
 			r = declaracoes.get(i).verificarSemantica();
 			if (!r)
 				break;
 		}
 		return r;
 	}
-	
+
 	public String gerarCodigoIntermediario(String filename) {
 		return null;
 	}

@@ -24,15 +24,15 @@ public class DeclFuncao implements DeclGlobal {
 		// verificar se ja foi declarada
 		if (SymbolTable.getInstance().nameExistsGlobal(nomesParams.getId())) {
 			System.out.println("Função com mesmo nome já declarada.");
-			
+
 			return false;
 		} else { // se nao, adiciona na tabela
 			SymbolTable.getInstance().putGlobal(nomesParams.getId(), this);
 			System.out.println(nomesParams.getId());
 		}
-		return (this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica() );
-		//após verificarSemantica de bloco, limpar a hLocal;
-		
+		return (this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica());
+		// após verificarSemantica de bloco, limpar a hLocal;
+
 	}
 
 	@Override

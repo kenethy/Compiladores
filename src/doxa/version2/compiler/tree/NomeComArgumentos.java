@@ -30,15 +30,19 @@ public class NomeComArgumentos {
 	}
 
 	public Boolean verificarSemantica() {
-		for(int i=0; i<listas.size(); i++){ 		//  laço pra iterar cada parentesis na declaração da Função ex.: proc mdcDe *(* x - int *)* e *(* y - int *)* - int{
-			if (listas.get(i)!=null)
-			for(int y=0; y<listas.get(i).size(); y++){ 		// laço para iterar cada Declaração dentro do parentesis  ex.: proc mdcDe(*x - int* , *j - char*)e(y - int) - int{
-				DeclVariavel declaracao = listas.get(i).get(y);
-				if (SymbolTable.getInstance().nameExistsLocal(declaracao.getIdents().get(0))) { //getIdents().get(0)  o tamanho dessa linkedList, nesse caso específico, é sempre 1, segundo a gramática. Vide  DeclVariavel.idents
-					System.out.println("Variável com mesmo nome já declarada.");
-					return false;
-				} else { // se nao, adiciona na tabela local
-					SymbolTable.getInstance().putLocal(declaracao.getIdents().get(0), declaracao);
+		// laço pra iterar cada parentesis na declaração da Função ex.: proc mdcDe *(* x - int *)* e *(* y - int *)* - int {
+		for (int i = 0; i < listas.size(); i++) {
+			if (listas.get(i) != null) {
+				// laço para iterar cada Declaração dentro do parentesis ex.: proc mdcDe(*x - int* , *j - char*)e(y - int) - int {
+				for (int y = 0; y < listas.get(i).size(); y++) {
+					DeclVariavel declaracao = listas.get(i).get(y);
+					// getIdents().get(0) o tamanho dessa linkedList, nesse caso específico, é sempre 1, segundo a gramática. Vide DeclVariavel.idents
+					if (SymbolTable.getInstance().nameExistsLocal(declaracao.getIdents().get(0))) {
+						System.out.println("Variável com mesmo nome já declarada.");
+						return false;
+					} else { // se nao, adiciona na tabela local
+						SymbolTable.getInstance().putLocal(declaracao.getIdents().get(0), declaracao);
+					}
 				}
 			}
 		}

@@ -5,7 +5,6 @@ import java.util.List;
 
 import doxa.version2.compiler.tree.Tipo;
 
-
 public class Bloco implements Comando {
 	private List<Comando> comandos;
 
