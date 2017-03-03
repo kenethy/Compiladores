@@ -23,7 +23,7 @@ public class Bloco implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		return true;
 	}
 
 	@Override
