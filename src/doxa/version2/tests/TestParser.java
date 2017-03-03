@@ -24,18 +24,18 @@ public class TestParser {
 		Lexer lexer;   
 		Parser parser;
 		
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		String arquivo;
-		
+       // BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		// String arquivo;
+		/*
 		if (args.length == 0) {
 			System.out.print("Digite o nome do arquivo: ");
 			arquivo = in.readLine();
 		} else {
 			arquivo = args[0];
 		}		
-		
+		*/
 		try {
-			lexer = new Lexer(new FileInputStream(arquivo));
+			lexer = new Lexer(new FileInputStream("entrada"));
 			parser = new Parser(lexer);
 
 			Symbol output = parser.parse();

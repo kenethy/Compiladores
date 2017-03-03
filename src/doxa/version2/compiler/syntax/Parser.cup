@@ -121,8 +121,8 @@ nome_args ::= IDENTIFICADOR:i ABRE_PAR param_formais:p FECHA_PAR
             ;
              
 
-param_formais ::= IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
-				{:DeclVariavel d= new DeclVariavel(i,t); r.addFirst(d);:}
+param_formais ::= IDENTIFICADOR:id SUB tipo:t resto_param_formais:r
+				{:DeclVariavel d= new DeclVariavel(id,t); r.addFirst(d); RESULT=r;:}
                 
                 | /*vazio*/
 				{:RESULT = new LinkedList<DeclVariavel>(); :}
@@ -130,7 +130,7 @@ param_formais ::= IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
                 	
 		
 resto_param_formais ::= VIRGULA IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
-						{:DeclVariavel d= new DeclVariavel(i,t) ; r.addFirst(d); :}
+						{:DeclVariavel d= new DeclVariavel(i,t) ; r.addLast(d); RESULT=r;:}
                       | /*vazio*/
                 		{:RESULT = new LinkedList<DeclVariavel>(); :}      
                       ; 

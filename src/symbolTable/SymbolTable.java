@@ -21,7 +21,13 @@ public class SymbolTable {
 		
 	}
 	
-	public boolean nameExists(String name){ // retorna True se o nome existe na tabela
+	public boolean nameExistsGlobal(String name){ // retorna True se o nome existe na tabela
+		if (hmGlobal.containsKey(name))
+			return true;
+		return false;
+	}
+	
+	public boolean nameExistsLocal(String name){ // retorna True se o nome existe na tabela
 		if (hmLocal.containsKey(name))
 			return true;
 		return false;
@@ -32,8 +38,11 @@ public class SymbolTable {
 	}
 	
 	public void putGlobal(String nome, Object objeto){
-		hmGlobal.put(nome, objeto);
-		
+		hmGlobal.put(nome, objeto);	
+	}
+	
+	public void putLocal(String nome, Object objeto){
+		hmLocal.put(nome, objeto);	
 	}
 	
 }
