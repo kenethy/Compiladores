@@ -38,10 +38,10 @@ public class NomeComArgumentos {
 					DeclVariavel declaracao = listas.get(i).get(y);
 					// getIdents().get(0) o tamanho dessa linkedList, nesse caso específico, é sempre 1, segundo a gramática. Vide DeclVariavel.idents
 					if (SymbolTable.getInstance().nameExistsLocal(declaracao.getIdents().get(0))) {
-						System.out.println("Variável com mesmo nome já declarada.");
+						System.out.println("Parâmetro duplicado.");
 						return false;
 					} else { // se nao, adiciona na tabela local
-						SymbolTable.getInstance().putLocal(declaracao.getIdents().get(0), declaracao);
+						SymbolTable.getInstance().putLocal(declaracao.getIdents().get(0), declaracao.getTipo());
 					}
 				}
 			}

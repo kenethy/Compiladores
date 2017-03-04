@@ -10,7 +10,7 @@ public class CharLiteral implements Expressao {
 	}
 
 	public Tipo getTipo() {
-		return null;
+		return Tipo.CHAR;
 	}
 
 	@Override

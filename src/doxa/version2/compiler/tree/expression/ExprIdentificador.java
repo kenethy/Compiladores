@@ -1,6 +1,7 @@
 package doxa.version2.compiler.tree.expression;
 
 import doxa.version2.compiler.tree.Tipo;
+import symbolTable.SymbolTable;
 
 public class ExprIdentificador implements Expressao {
 	private String identificador;
@@ -16,7 +17,15 @@ public class ExprIdentificador implements Expressao {
 
 	@Override
 	public Tipo getTipo() {
-		return null;
+		Tipo idTipo = null;
+		if (SymbolTable.getInstance().nameExistsLocal(identificador)) {
+			idTipo = (Tipo) SymbolTable.getInstance().getLocal(identificador);
+
+		} else if (SymbolTable.getInstance().nameExistsGlobal(identificador)) {
+			idTipo = (Tipo) SymbolTable.getInstance().getGlobal(identificador);
+		}
+
+		return idTipo;
 	}
 
 	@Override

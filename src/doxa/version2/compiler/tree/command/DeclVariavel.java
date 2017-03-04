@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import doxa.version2.compiler.tree.DeclGlobal;
 import doxa.version2.compiler.tree.Tipo;
+import symbolTable.SymbolTable;
 
 public class DeclVariavel implements Comando, DeclGlobal {
 	private LinkedList<String> idents;
@@ -23,14 +24,27 @@ public class DeclVariavel implements Comando, DeclGlobal {
 		idents.addLast(id);
 		this.tipo = tipo;
 	}
-	
+
+	public Tipo getTipo() {
+		return this.tipo;
+	}
+
 	public LinkedList<String> getIdents() {
 		return idents;
 	}
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		for (int i = 0; i < idents.size(); i++) {
+			if (SymbolTable.getInstance().nameExistsLocal(idents.get(i))) {
+				System.out.println("Variável duplicada.");
+				return false;
+			} else { // se nao, adicione à tabela
+				SymbolTable.getInstance().putLocal(idents.get(i), tipo);
+			}
+		}
+
+		return true;
 	}
 
 	@Override

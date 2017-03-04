@@ -2,6 +2,7 @@ package doxa.version2.compiler.tree.command;
 
 import doxa.version2.compiler.tree.Tipo;
 import doxa.version2.compiler.tree.expression.Expressao;
+import symbolTable.SymbolTable;
 
 public class Atribuicao implements Comando {
 	private String identificador;
@@ -14,7 +15,22 @@ public class Atribuicao implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		expressao.verificarSemantica();
+		Tipo idTipo = null;
+		if (SymbolTable.getInstance().nameExistsLocal(identificador)) {
+			idTipo = (Tipo) SymbolTable.getInstance().getLocal(identificador);
+
+		} else if (SymbolTable.getInstance().nameExistsGlobal(identificador)) {
+			idTipo = (Tipo) SymbolTable.getInstance().getGlobal(identificador);
+		}
+
+		System.out.println("Tipo ID:" + idTipo);
+		System.out.println("Tipo expressao:" + expressao.getTipo());
+		if (expressao.getTipo() == idTipo) {
+			return true;
+		}
+		System.out.println("Tipos incompatível na atribuição");
+		return false;
 	}
 
 	@Override

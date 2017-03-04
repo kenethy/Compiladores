@@ -22,7 +22,15 @@ public class Bloco implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return true;
+		Boolean r = true;
+		for (int i = 0; i < comandos.size(); i++) {
+			r = comandos.get(i).verificarSemantica();
+			if (r==false){
+				System.out.println("Semantica do bloco incorreta.");
+				break;
+			}
+		}
+		return r;
 	}
 
 	@Override

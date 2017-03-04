@@ -21,16 +21,17 @@ public class DeclFuncao implements DeclGlobal {
 
 	@Override
 	public Boolean verificarSemantica() {
-		// verificar se ja foi declarada
+		// verificar se a funcao ja foi declarada
 		if (SymbolTable.getInstance().nameExistsGlobal(nomesParams.getId())) {
 			System.out.println("Função com mesmo nome já declarada.");
 
 			return false;
-		} else { // se nao, adiciona na tabela
+		} else { // se nao, adicione à tabela
 			SymbolTable.getInstance().putGlobal(nomesParams.getId(), this);
-			System.out.println(nomesParams.getId());
 		}
-		return (this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica());
+		boolean p = this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica();
+		SymbolTable.getInstance().clearLocal();
+		return (p);
 		// após verificarSemantica de bloco, limpar a hLocal;
 
 	}

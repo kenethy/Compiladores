@@ -17,7 +17,7 @@ public class Programa {
 		Boolean r = true;
 		for (int i = 0; i < declaracoes.size(); i++) {
 			r = declaracoes.get(i).verificarSemantica();
-			if (!r)
+			if (r==false)
 				break;
 		}
 		return r;

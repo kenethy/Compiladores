@@ -7,6 +7,7 @@ public class ExprAritmetica implements Expressao {
 	private Expressao exp1;
 	private Expressao exp2;
 	private String operacao;
+	private Tipo tipo;
 
 	public ExprAritmetica(Expressao exp1, Expressao exp2, String operacao) {
 		this.exp1 = exp1;
@@ -16,12 +17,39 @@ public class ExprAritmetica implements Expressao {
 
 	@Override
 	public Boolean verificarSemantica() {
-			return null;
+		// regra 1
+		if (exp1.getTipo() == exp2.getTipo()) {
+			if (exp1.getTipo() == Tipo.FLOAT)
+				this.tipo = Tipo.FLOAT;
+			else if (exp1.getTipo() == Tipo.INT) {
+				this.tipo = Tipo.INT;
+			}
+		}
+
+		// regra 2
+		else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+			this.tipo = Tipo.FLOAT;
+		}
+
+		// regra 4
+		else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT) {
+			if(operacao.equals("+") || operacao.equals("-"))
+				this.tipo = Tipo.CHAR;
+		}
+		
+		//regra 6
+		else {
+			System.out.println("Tipos incompatíveis na expressão");
+			this.tipo=null;
+			return false;
+		}
+
+		return true;
 	}
-	
+
 	@Override
 	public Tipo getTipo() {
-		return null;
+		return this.tipo;
 	}
 
 	@Override
