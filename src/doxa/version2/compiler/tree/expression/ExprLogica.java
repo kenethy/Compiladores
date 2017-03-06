@@ -13,15 +13,15 @@ public class ExprLogica implements Expressao {
 		this.exp2 = e2;
 		this.operLogico = oper;
 	}
-	
+
 	@Override
 	public Boolean verificarSemantica() {
 		exp1.verificarSemantica();
 		exp2.verificarSemantica();
-		if((exp1.getTipo() == exp2.getTipo() ) && (operLogico.equals("or") || operLogico.equals("and"))){
-			this.tipo=Tipo.BOOLEAN;
+		if ((exp1.getTipo() == exp2.getTipo()) && (operLogico.equals("or") || operLogico.equals("and"))) {
+			this.tipo = Tipo.BOOLEAN;
 			return true;
-		} else{
+		} else {
 			System.out.println("Expressão Lógica incorreta");
 			return false;
 		}

@@ -33,12 +33,12 @@ public class DeclFuncao implements DeclGlobal {
 		SymbolTable.getInstance().clearLocal();
 		return (p);
 	}
-	
-	public Tipo getTipo(){
+
+	public Tipo getTipo() {
 		return this.tipo;
 	}
-	
-	public NomeComArgumentos getParams(){
+
+	public NomeComArgumentos getParams() {
 		return this.nomesParams;
 	}
 
