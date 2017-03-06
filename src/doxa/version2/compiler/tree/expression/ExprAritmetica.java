@@ -7,7 +7,7 @@ public class ExprAritmetica implements Expressao {
 	private Expressao exp1;
 	private Expressao exp2;
 	private String operacao;
-	private Tipo tipo;
+	private Tipo tipo = null;
 
 	public ExprAritmetica(Expressao exp1, Expressao exp2, String operacao) {
 		this.exp1 = exp1;
@@ -24,11 +24,21 @@ public class ExprAritmetica implements Expressao {
 			else if (exp1.getTipo() == Tipo.INT) {
 				this.tipo = Tipo.INT;
 			}
+			else {
+				System.out.println("Tipos incompatíveis");
+				return false;
+			}
 		}
 
 		// regra 2
 		else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 			this.tipo = Tipo.FLOAT;
+		}
+		
+		//regra 3
+		else if (exp1.getTipo() == Tipo.INT && exp2.getTipo() == Tipo.INT) {
+			if(operacao.equals("%"))
+				this.tipo = Tipo.INT;
 		}
 
 		// regra 4
@@ -40,7 +50,6 @@ public class ExprAritmetica implements Expressao {
 		//regra 6
 		else {
 			System.out.println("Tipos incompatíveis na expressão");
-			this.tipo=null;
 			return false;
 		}
 

@@ -26,7 +26,7 @@ public class NomeComArgumentos {
 	}
 
 	public void addParamForm(LinkedList<DeclVariavel> paramForm) {
-		this.listas.add(paramForm);
+		this.listas.addLast(paramForm);
 	}
 
 	public Boolean verificarSemantica() {
@@ -47,6 +47,10 @@ public class NomeComArgumentos {
 			}
 		}
 		return true;
+	}
+	
+	public LinkedList<LinkedList<DeclVariavel>> getListas(){
+		return this.listas;
 	}
 
 	public String gerarCodigoIntermediario(String filename) {

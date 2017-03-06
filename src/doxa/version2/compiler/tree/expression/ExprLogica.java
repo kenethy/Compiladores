@@ -6,6 +6,7 @@ public class ExprLogica implements Expressao {
 	private Expressao exp1;
 	private Expressao exp2;
 	private String operLogico;
+	private Tipo tipo;
 
 	public ExprLogica(Expressao e1, Expressao e2, String oper) {
 		this.exp1 = e1;
@@ -15,12 +16,20 @@ public class ExprLogica implements Expressao {
 	
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		exp1.verificarSemantica();
+		exp2.verificarSemantica();
+		if((exp1.getTipo() == exp2.getTipo() ) && (operLogico.equals("or") || operLogico.equals("and"))){
+			this.tipo=Tipo.BOOLEAN;
+			return true;
+		} else{
+			System.out.println("Expressão Lógica incorreta");
+			return false;
+		}
 	}
 
 	@Override
 	public Tipo getTipo() {
-		return Tipo.BOOLEAN;
+		return this.tipo;
 	}
 
 	@Override

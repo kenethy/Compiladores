@@ -25,8 +25,7 @@ public class Bloco implements Comando {
 		Boolean r = true;
 		for (int i = 0; i < comandos.size(); i++) {
 			r = comandos.get(i).verificarSemantica();
-			if (r==false){
-				System.out.println("Semantica do bloco incorreta.");
+			if (!r){
 				break;
 			}
 		}
