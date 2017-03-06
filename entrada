@@ -1,7 +1,14 @@
-proc teste(x-int) - char{
+proc teste(x-int, h - char, p - float)de(m-int) - char{
 	var y - int;
 	var j - char;
 	var f - float;
-	y := j+y;
+	if((1<2) or not(f=16.8) and j<>'j' or y=9){
+		j:='j';
+		teste(y,j)de();
+	}else{
+		f:=9.8*5;
+		f:=9.8/8;
+		y:=8/8;
+	}
 
 }

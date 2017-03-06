@@ -130,7 +130,7 @@ param_formais ::= IDENTIFICADOR:id SUB tipo:t resto_param_formais:r
                 	
 		
 resto_param_formais ::= VIRGULA IDENTIFICADOR:i SUB tipo:t resto_param_formais:r
-						{:DeclVariavel d= new DeclVariavel(i,t) ; r.addLast(d); RESULT=r;:}
+						{:DeclVariavel d= new DeclVariavel(i,t) ; r.addFirst(d); RESULT=r;:}
                       | /*vazio*/
                 		{:RESULT = new LinkedList<DeclVariavel>(); :}      
                       ; 
@@ -239,10 +239,10 @@ expressao ::= expressao:e1 SOMA expressao:e2
             	{: 	RESULT = new ExprAritmetica(e1, e2, "%");	:}
         
             | expressao:e1 AND expressao:e2
-            	{: 	RESULT = new ExprLogica(e1, e2, "&&");	:}
+            	{: 	RESULT = new ExprLogica(e1, e2, "and");	:}
         
         	| expressao:e1 OR expressao:e2
-        		{: 	RESULT = new ExprLogica(e1, e2, "||");	:}
+        		{: 	RESULT = new ExprLogica(e1, e2, "or");	:}
         
         	| expressao:e1 IGUAL_QUE expressao:e2
         		{: 	RESULT = new ExprRelacional(e1, e2, "="); :}
@@ -270,11 +270,11 @@ expressao ::= expressao:e1 SOMA expressao:e2
 expr_basica ::= ABRE_PAR expressao:e FECHA_PAR 
              	{: RESULT = e;	:}
              
-   		      | NOT:n expr_basica:e
-   		      	{: RESULT = new ExpUnaria(n, e);	:}
+   		      | NOT expr_basica:e
+   		      	{: RESULT = new ExpUnaria("not", e);	:}
    		      	
-         	  | SUB:s expr_basica:e
-         		{: RESULT = new ExpUnaria(s, e);	:}
+         	  | SUB expr_basica:e
+         		{: RESULT = new ExpUnaria("-", e);	:}
          		
         	  | INT_LITERAL:i
                 {:  int valor = Integer.parseInt(i); 

@@ -32,8 +32,14 @@ public class DeclFuncao implements DeclGlobal {
 		boolean p = this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica();
 		SymbolTable.getInstance().clearLocal();
 		return (p);
-		// após verificarSemantica de bloco, limpar a hLocal;
-
+	}
+	
+	public Tipo getTipo(){
+		return this.tipo;
+	}
+	
+	public NomeComArgumentos getParams(){
+		return this.nomesParams;
 	}
 
 	@Override

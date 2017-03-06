@@ -28,15 +28,21 @@ public class Decisao implements Comando {
 	@Override
 	public Boolean verificarSemantica() {
 		this.expressao.verificarSemantica();
+		Boolean r = false;
 		if (this.expressao.getTipo() == Tipo.BOOLEAN){
-			if (this.comandoIf.verificarSemantica() == false)
-				return false;
-			if (comandoElse != null)
-				if(this.comandoElse.verificarSemantica() == false);
+			if (this.comandoIf.verificarSemantica() == true)
+				r = true;
+		} 
+		if (comandoElse != null && r==true){
+				if(this.comandoElse.verificarSemantica() == true){
+					return true;
+				}else{
+					System.out.println("Semantica do ELSE incorreta");
 					return false;
+				}
 		}
-		
-		return true;
+		System.out.println("Semantica de IF incorreta");
+		return false;
 	}
 
 	@Override

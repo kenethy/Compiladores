@@ -24,8 +24,6 @@ public class Atribuicao implements Comando {
 			idTipo = (Tipo) SymbolTable.getInstance().getGlobal(identificador);
 		}
 
-		System.out.println("Tipo ID:" + idTipo);
-		System.out.println("Tipo expressao:" + expressao.getTipo());
 		if (expressao.getTipo() == idTipo) {
 			return true;
 		}
