@@ -15,11 +15,11 @@ public class CharLiteral implements Expressao {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		return true;
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

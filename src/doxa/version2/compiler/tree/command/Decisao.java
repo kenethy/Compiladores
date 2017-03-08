@@ -32,7 +32,10 @@ public class Decisao implements Comando {
 		if (this.expressao.getTipo() == Tipo.BOOLEAN){
 			if (this.comandoIf.verificarSemantica() == true)
 				r = true;
-		} 
+		}
+		if(comandoElse == null){
+			return r;
+		}
 		if (comandoElse != null && r==true){
 				if(this.comandoElse.verificarSemantica() == true){
 					return true;
@@ -46,7 +49,7 @@ public class Decisao implements Comando {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

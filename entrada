@@ -1,14 +1,22 @@
-proc teste(x-int, h - char, p - float)de(m-int) - char{
-	var y - int;
-	var j - char;
-	var f - float;
-	if((1<2) or not(f=16.8) and j<>'j' or y=9){
-		j:='j';
-		teste(y,j)de();
-	}else{
-		f:=9.8*5;
-		f:=9.8/8;
-		y:=8/8;
-	}
 
+proc mdcDe(x - int)e(y - int) - int{
+	if (y = 0) {
+		return x;
+	} else {
+		return mdcDe(y)e(x % y);
+	}
+}
+
+proc main(){
+	var x, y - int;
+	var m - int;
+	x := 120; >> dois valores a partir dos quais <<
+	y := 640; >> sera calculado o m.d.c. <<
+	m := mdcDe (x) e (y);
+	prnt('m', 'd', 'c', '(');
+	prnt( x );
+	prnt(',');
+	prnt( y );
+	prnt(')', ':');
+	prnt( m );
 }

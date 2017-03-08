@@ -15,11 +15,15 @@ public class Iteracao implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		if(!expressao.verificarSemantica())
+			return false;
+		if(!comando.verificarSemantica())
+			return false;
+		return true;
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

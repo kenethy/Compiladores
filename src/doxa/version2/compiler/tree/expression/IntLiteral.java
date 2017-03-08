@@ -11,7 +11,7 @@ public class IntLiteral implements Expressao {
 	
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		return true;
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class IntLiteral implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

@@ -23,7 +23,7 @@ public class Programa {
 		return r;
 	}
 
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

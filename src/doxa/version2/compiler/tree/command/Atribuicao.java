@@ -32,7 +32,7 @@ public class Atribuicao implements Comando {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

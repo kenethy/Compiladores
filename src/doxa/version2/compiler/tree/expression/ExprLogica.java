@@ -33,7 +33,7 @@ public class ExprLogica implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

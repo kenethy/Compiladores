@@ -4,5 +4,5 @@ import doxa.version2.compiler.tree.Tipo;
 
 public interface Comando {
 	Boolean verificarSemantica();
-	String gerarCodigoIntermediario(String filename);
+	String gerarCodigo(String filename);
 }

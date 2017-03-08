@@ -12,7 +12,14 @@ public class ExprIdentificador implements Expressao {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		if (SymbolTable.getInstance().nameExistsLocal(identificador))
+			return true;
+		else if(SymbolTable.getInstance().nameExistsGlobal(identificador))
+			return true;
+		else {
+			System.out.println("Variável não existe");
+			return false;
+		}
 	}
 
 	@Override
@@ -29,7 +36,7 @@ public class ExprIdentificador implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

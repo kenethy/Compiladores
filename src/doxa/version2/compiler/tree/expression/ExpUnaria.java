@@ -36,7 +36,7 @@ public class ExpUnaria implements Expressao {
 		return this.tipo;
 	}
 
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

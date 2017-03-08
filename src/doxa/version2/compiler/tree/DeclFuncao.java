@@ -24,26 +24,28 @@ public class DeclFuncao implements DeclGlobal {
 		// verificar se a funcao ja foi declarada
 		if (SymbolTable.getInstance().nameExistsGlobal(nomesParams.getId())) {
 			System.out.println("Função com mesmo nome já declarada.");
-
 			return false;
 		} else { // se nao, adicione à tabela
+			SymbolTable.getInstance().disableFDeclGlobal();
 			SymbolTable.getInstance().putGlobal(nomesParams.getId(), this);
+			SymbolTable.getInstance().setTipoAtual(this.tipo);
 		}
 		boolean p = this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica();
+		SymbolTable.getInstance().setFDeclGlobal();
 		SymbolTable.getInstance().clearLocal();
 		return (p);
 	}
-	
-	public Tipo getTipo(){
+
+	public Tipo getTipo() {
 		return this.tipo;
 	}
-	
-	public NomeComArgumentos getParams(){
+
+	public NomeComArgumentos getParams() {
 		return this.nomesParams;
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

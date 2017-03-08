@@ -1,7 +1,8 @@
-package doxa.version2.compiler.tree.command;
+package doxa.version2.compiler.tree.command;	
 
 import doxa.version2.compiler.tree.Tipo;
 import doxa.version2.compiler.tree.expression.Expressao;
+import symbolTable.SymbolTable;
 
 public class Retorno implements Comando {
 	private Expressao expressao;
@@ -12,11 +13,18 @@ public class Retorno implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		if (!expressao.verificarSemantica())
+			return false;
+		if(expressao.getTipo() == SymbolTable.getInstance().getTipoAtual())
+			return true;
+		else{
+			System.out.println("Tipo incompatível com o retorno da função.");
+			return false;
+		}
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

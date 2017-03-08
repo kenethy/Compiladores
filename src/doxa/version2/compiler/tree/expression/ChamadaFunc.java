@@ -62,7 +62,7 @@ public class ChamadaFunc implements Expressao, Comando {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

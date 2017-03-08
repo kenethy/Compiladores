@@ -5,5 +5,5 @@ import doxa.version2.compiler.tree.Tipo;
 public interface Expressao {
 	Boolean verificarSemantica() ;
 	Tipo getTipo();
-	String gerarCodigoIntermediario(String filename);
+	String gerarCodigo(String filename);
 }

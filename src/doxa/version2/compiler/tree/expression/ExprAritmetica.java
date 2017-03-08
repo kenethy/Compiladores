@@ -17,6 +17,10 @@ public class ExprAritmetica implements Expressao {
 
 	@Override
 	public Boolean verificarSemantica() {
+		if (!exp1.verificarSemantica())
+			return false;
+		if (!exp2.verificarSemantica())
+			return false;
 		// regra 1
 		if (exp1.getTipo() == exp2.getTipo()) {
 			if (exp1.getTipo() == Tipo.FLOAT)
@@ -62,7 +66,7 @@ public class ExprAritmetica implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 

@@ -13,11 +13,15 @@ public class Escrita implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		return null;
+		for (int i=0; i<listaExpressoes.size(); i++){
+			if(!listaExpressoes.get(i).verificarSemantica())
+				return false;
+		}
+		return true;
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

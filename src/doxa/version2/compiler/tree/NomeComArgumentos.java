@@ -53,7 +53,7 @@ public class NomeComArgumentos {
 		return this.listas;
 	}
 
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 }

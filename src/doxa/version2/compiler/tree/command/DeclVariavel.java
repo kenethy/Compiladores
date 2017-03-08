@@ -39,8 +39,11 @@ public class DeclVariavel implements Comando, DeclGlobal {
 			if (SymbolTable.getInstance().nameExistsLocal(idents.get(i))) {
 				System.out.println("Variável duplicada.");
 				return false;
-			} else { // se nao, adicione à tabela
-				SymbolTable.getInstance().putLocal(idents.get(i), tipo);
+			} else { // se nao, adicione à tabela Global ou Local
+				if (SymbolTable.getInstance().isDeclGlobal())
+					SymbolTable.getInstance().putGlobal(idents.get(i), tipo);
+				else
+					SymbolTable.getInstance().putLocal(idents.get(i), tipo);
 			}
 		}
 
@@ -48,7 +51,7 @@ public class DeclVariavel implements Comando, DeclGlobal {
 	}
 
 	@Override
-	public String gerarCodigoIntermediario(String filename) {
+	public String gerarCodigo(String filename) {
 		return null;
 	}
 
