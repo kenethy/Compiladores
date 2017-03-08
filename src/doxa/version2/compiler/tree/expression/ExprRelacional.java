@@ -14,32 +14,32 @@ public class ExprRelacional implements Expressao {
 		this.expr2 = expr2;
 		this.operador = operador;
 	}
-	
+
 	@Override
 	public Boolean verificarSemantica() {
 		expr1.verificarSemantica();
 		expr2.verificarSemantica();
-		
-		//regra 7 e 8
-		if (expr1.getTipo() == expr2.getTipo() && (expr1.getTipo()==Tipo.INT || expr1.getTipo()==Tipo.FLOAT)){
-			if(operador.equals("<") || operador.equals("<=") || operador.equals(">") || operador.equals(">=") || operador.equals("=") || operador.equals("<>")){
+
+		// regra 7 e 8
+		if (expr1.getTipo() == expr2.getTipo() && (expr1.getTipo() == Tipo.INT || expr1.getTipo() == Tipo.FLOAT)) {
+			if (operador.equals("<") || operador.equals("<=") || operador.equals(">") || operador.equals(">=")
+					|| operador.equals("=") || operador.equals("<>")) {
 				this.tipo = Tipo.BOOLEAN;
-			}
-			else{
+			} else {
 				System.out.println("Operador relacional incorreto");
 				return false;
 			}
-			//regra 8
-		} else if(expr1.getTipo() == expr2.getTipo() && expr1.getTipo() == Tipo.CHAR){
-			if(operador.equals("=") || operador.equals("<>"))
+			// regra 8
+		} else if (expr1.getTipo() == expr2.getTipo() && expr1.getTipo() == Tipo.CHAR) {
+			if (operador.equals("=") || operador.equals("<>"))
 				this.tipo = Tipo.BOOLEAN;
-			else{
+			else {
 				System.out.println("Operador relacional incorreto");
 				return false;
 			}
 		}
-			
-		else{
+
+		else {
 			System.out.println("Expressão relacional incorreta");
 			return false;
 		}
@@ -50,7 +50,7 @@ public class ExprRelacional implements Expressao {
 	public Tipo getTipo() {
 		return this.tipo;
 	}
-	
+
 	@Override
 	public String gerarCodigo(String filename) {
 		return null;

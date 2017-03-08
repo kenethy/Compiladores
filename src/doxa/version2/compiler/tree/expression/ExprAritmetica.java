@@ -27,8 +27,7 @@ public class ExprAritmetica implements Expressao {
 				this.tipo = Tipo.FLOAT;
 			else if (exp1.getTipo() == Tipo.INT) {
 				this.tipo = Tipo.INT;
-			}
-			else {
+			} else {
 				System.out.println("Tipos incompatíveis");
 				return false;
 			}
@@ -38,20 +37,20 @@ public class ExprAritmetica implements Expressao {
 		else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 			this.tipo = Tipo.FLOAT;
 		}
-		
-		//regra 3
+
+		// regra 3
 		else if (exp1.getTipo() == Tipo.INT && exp2.getTipo() == Tipo.INT) {
-			if(operacao.equals("%"))
+			if (operacao.equals("%"))
 				this.tipo = Tipo.INT;
 		}
 
 		// regra 4
 		else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT) {
-			if(operacao.equals("+") || operacao.equals("-"))
+			if (operacao.equals("+") || operacao.equals("-"))
 				this.tipo = Tipo.CHAR;
 		}
-		
-		//regra 6
+
+		// regra 6
 		else {
 			System.out.println("Tipos incompatíveis na expressão");
 			return false;
