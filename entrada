@@ -1,4 +1,3 @@
-
 proc mdcDe(x - int)e(y - int) - int{
 	if (y = 0) {
 		return x;
