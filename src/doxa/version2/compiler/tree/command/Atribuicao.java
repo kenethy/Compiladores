@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.command;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 import doxa.version2.compiler.tree.expression.Expressao;
 import symbolTable.SymbolTable;
@@ -32,7 +34,21 @@ public class Atribuicao implements Comando {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		expressao.gerarCodigo(p);
+		int pos = (int)SymbolTable.getInstance().getLocal(identificador);
+		switch (expressao.getTipo()) {
+		case INT:
+			p.printf("\tistore_%d\n\n", pos);
+			break;
+		case FLOAT:
+			p.printf("\tfstore_%d\n\n", pos);
+			break;
+		case CHAR:
+			p.printf("\tastore_%d\n\n", pos);
+			break;
+		}
+
 		return null;
 	}
 

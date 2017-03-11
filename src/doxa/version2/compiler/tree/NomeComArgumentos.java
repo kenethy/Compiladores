@@ -1,10 +1,8 @@
 package doxa.version2.compiler.tree;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import doxa.version2.compiler.tree.command.DeclVariavel;
-import doxa.version2.compiler.tree.expression.Expressao;
 import symbolTable.SymbolTable;
 
 public class NomeComArgumentos {
@@ -30,13 +28,18 @@ public class NomeComArgumentos {
 	}
 
 	public Boolean verificarSemantica() {
-		// laço pra iterar cada parentesis na declaração da Função ex.: proc mdcDe *(* x - int *)* e *(* y - int *)* - int {
+		// laço pra iterar cada parentesis na declaração da Função ex.: proc
+		// mdcDe *(* x - int *)* e *(* y - int *)* - int {
 		for (int i = 0; i < listas.size(); i++) {
 			if (listas.get(i) != null) {
-				// laço para iterar cada Declaração dentro do parentesis ex.: proc mdcDe(*x - int* , *j - char*)e(y - int) - int {
+				// laço para iterar cada Declaração dentro do parentesis ex.:
+				// proc mdcDe(*x - int* , *j - char*)e(y - int) - int {
 				for (int y = 0; y < listas.get(i).size(); y++) {
 					DeclVariavel declaracao = listas.get(i).get(y);
-					// getIdents().get(0) o tamanho dessa linkedList, nesse caso específico, é sempre 1, segundo a gramática. Vide DeclVariavel.idents
+					declaracao.defTipoJ();
+					// getIdents().get(0) o tamanho dessa linkedList, nesse caso
+					// específico, é sempre 1, segundo a gramática. Vide
+					// DeclVariavel.idents
 					if (SymbolTable.getInstance().nameExistsLocal(declaracao.getIdents().get(0))) {
 						System.out.println("Parâmetro duplicado.");
 						return false;
@@ -48,8 +51,23 @@ public class NomeComArgumentos {
 		}
 		return true;
 	}
-	
-	public LinkedList<LinkedList<DeclVariavel>> getListas(){
+
+	public String getTipoCodigo(){
+		String r = "";
+		for (int i = 0; i < listas.size(); i++) {
+			if (listas.get(i) != null) {
+				for (int y = 0; y < listas.get(i).size(); y++) {
+					DeclVariavel declaracao = listas.get(i).get(y);
+					r = r + declaracao.getTipoJ();
+					
+				}
+			}
+		}
+		
+		return r;
+	}
+
+	public LinkedList<LinkedList<DeclVariavel>> getListas() {
 		return this.listas;
 	}
 

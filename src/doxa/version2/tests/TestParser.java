@@ -1,9 +1,7 @@
 package doxa.version2.tests;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import doxa.version2.compiler.syntax.Lexer;
 import doxa.version2.compiler.syntax.Parser;
@@ -43,6 +41,10 @@ public class TestParser {
 			Programa p = (Programa) output.value;
 			if (p.verificarSemantica())
 				System.out.println("Semantica OK");
+			
+			p.gerarCodigo("Codigo.j");
+			
+			Process process  = Runtime.getRuntime().exec("cmd /c start jasmin.bat"); //pra rodar o jasmin, compilar o .J e executar o .class com o Java
 			
 			System.out.println("Saida: " + p);
 		

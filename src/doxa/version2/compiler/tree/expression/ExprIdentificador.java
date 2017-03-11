@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.expression;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 import symbolTable.SymbolTable;
 
@@ -36,7 +38,7 @@ public class ExprIdentificador implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 

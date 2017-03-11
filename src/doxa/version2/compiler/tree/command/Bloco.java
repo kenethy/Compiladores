@@ -1,9 +1,8 @@
 package doxa.version2.compiler.tree.command;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import doxa.version2.compiler.tree.Tipo;
 
 public class Bloco implements Comando {
 	private List<Comando> comandos;
@@ -33,7 +32,10 @@ public class Bloco implements Comando {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		for (int i = 0; i < comandos.size(); i++){
+			comandos.get(i).gerarCodigo(p);
+		}
 		return null;
 	}
 }

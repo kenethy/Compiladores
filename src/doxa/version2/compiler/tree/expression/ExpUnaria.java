@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.expression;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 
 public class ExpUnaria implements Expressao {
@@ -36,7 +38,7 @@ public class ExpUnaria implements Expressao {
 		return this.tipo;
 	}
 
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 }

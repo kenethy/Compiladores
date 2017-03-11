@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.command;	
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 import doxa.version2.compiler.tree.expression.Expressao;
 import symbolTable.SymbolTable;
@@ -24,7 +26,7 @@ public class Retorno implements Comando {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 

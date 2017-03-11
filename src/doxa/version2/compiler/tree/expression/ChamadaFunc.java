@@ -1,5 +1,6 @@
 package doxa.version2.compiler.tree.expression;
 
+import java.io.PrintStream;
 import java.util.LinkedList;
 
 import doxa.version2.compiler.tree.Tipo;
@@ -62,7 +63,7 @@ public class ChamadaFunc implements Expressao, Comando {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 }

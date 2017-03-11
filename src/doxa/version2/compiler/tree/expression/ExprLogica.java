@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.expression;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 
 public class ExprLogica implements Expressao {
@@ -33,7 +35,7 @@ public class ExprLogica implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 

@@ -1,5 +1,6 @@
 package doxa.version2.compiler.tree.command;
 
+import java.io.PrintStream;
 import java.util.LinkedList;
 
 import doxa.version2.compiler.tree.DeclGlobal;
@@ -9,6 +10,10 @@ import symbolTable.SymbolTable;
 public class DeclVariavel implements Comando, DeclGlobal {
 	private LinkedList<String> idents;
 	private Tipo tipo;
+	private Boolean isGlobal;
+	private String tipoJ;
+	private LinkedList<Integer> indiceLocal = new LinkedList<Integer>();
+	private static int countIndice = 0;
 
 	public DeclVariavel() {
 		this.idents = new LinkedList<String>();
@@ -33,6 +38,34 @@ public class DeclVariavel implements Comando, DeclGlobal {
 		return idents;
 	}
 
+	public void nextIndice() {
+		this.countIndice++;
+	}
+
+	public String getTipoJ() {
+		return this.tipoJ;
+	}
+
+	public void defTipoJ() {
+		switch (this.tipo) { // define a letra do tipo para ser usado na geração
+								// de codigo
+
+		case INT:
+			this.tipoJ = "I";
+			break;
+		case FLOAT:
+			this.tipoJ = "F";
+			break;
+		case CHAR:
+			this.tipoJ = "C";
+			break;
+		}
+	}
+	
+	public int getIndice(String id){
+		return this.indiceLocal.get(idents.indexOf(id));
+	}
+
 	@Override
 	public Boolean verificarSemantica() {
 		for (int i = 0; i < idents.size(); i++) {
@@ -40,10 +73,16 @@ public class DeclVariavel implements Comando, DeclGlobal {
 				System.out.println("Variável duplicada.");
 				return false;
 			} else { // se nao, adicione à tabela Global ou Local
-				if (SymbolTable.getInstance().isDeclGlobal())
+				this.defTipoJ();
+				if (SymbolTable.getInstance().isDeclGlobal()) {
 					SymbolTable.getInstance().putGlobal(idents.get(i), tipo);
-				else
+					isGlobal = true;
+				} else {
 					SymbolTable.getInstance().putLocal(idents.get(i), tipo);
+					indiceLocal.add(countIndice);
+					nextIndice();
+					isGlobal = false;
+				}
 			}
 		}
 
@@ -51,7 +90,17 @@ public class DeclVariavel implements Comando, DeclGlobal {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		if (isGlobal) { // .field private static Nome Tipo
+			for (int i = 0; i < idents.size(); i++) {
+				p.printf(".field private static %s %s \n", this.idents.get(i), this.getTipoJ());
+			}
+		} else { // decl local
+			// nextIndice();
+			for (int i = 0; i < idents.size(); i++) {
+				SymbolTable.getInstance().putLocal(idents.get(i), indiceLocal.get(i)); // para saber o índice da variável local no array de Variáveis Locais do JVM 
+			}
+		}
 		return null;
 	}
 

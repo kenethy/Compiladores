@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.command.Bloco;
 import symbolTable.SymbolTable;
 
@@ -45,7 +47,34 @@ public class DeclFuncao implements DeclGlobal {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		String t = null;
+
+		if (this.tipo == null)
+			t = "V";
+		else {
+			switch (tipo) {
+			case FLOAT:
+				t = "F";
+				break;
+
+			case INT:
+				t = "I";
+				break;
+
+			case CHAR:
+				t = "C";
+				break;
+			}
+		}
+		if (nomesParams.getId().equals("main")) {
+			p.print("\n.method public static main([Ljava/lang/String;)V\n");
+		} else {
+			p.printf("\n.method public %s(%s)%s\n", nomesParams.getId(), nomesParams.getTipoCodigo(), t);
+		}
+		bloco.gerarCodigo(p);
+		p.print(".end method\n");
+
 		return null;
 	}
 

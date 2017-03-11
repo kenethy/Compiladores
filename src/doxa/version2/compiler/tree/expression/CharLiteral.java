@@ -1,5 +1,7 @@
 package doxa.version2.compiler.tree.expression;
 
+import java.io.PrintStream;
+
 import doxa.version2.compiler.tree.Tipo;
 
 public class CharLiteral implements Expressao {
@@ -19,7 +21,8 @@ public class CharLiteral implements Expressao {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		p.printf("\tldc %s\n",charLiteral);
 		return null;
 	}
 }

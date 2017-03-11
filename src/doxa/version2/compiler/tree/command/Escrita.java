@@ -1,5 +1,6 @@
 package doxa.version2.compiler.tree.command;
 
+import java.io.PrintStream;
 import java.util.List;
 
 import doxa.version2.compiler.tree.expression.Expressao;
@@ -21,7 +22,7 @@ public class Escrita implements Comando {
 	}
 
 	@Override
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
 }
