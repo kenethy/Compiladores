@@ -1,18 +1,22 @@
 .class public Codigo
 .super java/lang/Object
 
-.field private static n I 
-.field private static nRebuilt I 
 
 .method public static main([Ljava/lang/String;)V
+	.limit locals 10
+	.limit stack 10
+
 	ldc 51423
 	istore_0
 
+	iload_0
+	ldc 2
+	idiv
+	ldc 2
+	imul
 	istore_1
 
-.end method
-
-.method public teste(IC)I
+	return
 .end method
 
 .method public <init>()V

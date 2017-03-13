@@ -68,6 +68,63 @@ public class ExprAritmetica implements Expressao {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		exp1.gerarCodigo(p);
+		exp2.gerarCodigo(p);
+		switch (operacao) {
+		case "+":
+			if (exp1.getTipo() == exp2.getTipo()) {
+				if (exp1.getTipo() == Tipo.FLOAT)
+					p.println("\tfadd");
+				else if (exp1.getTipo() == Tipo.INT) {
+					p.println("\tiadd");
+				}
+			} else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT)
+					p.println("\tiadd");
+			else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+				p.println("\tfadd");
+			}
+			break;
+		case "-":
+			if (exp1.getTipo() == exp2.getTipo()) {
+				if (exp1.getTipo() == Tipo.FLOAT)
+					p.println("\tfsub");
+				else if (exp1.getTipo() == Tipo.INT) {
+					p.println("\tisub");
+				}
+			}else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT) 
+				p.println("\tisub");
+			else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+				p.println("\tfsub");
+			}
+			break;
+		case "*":
+			if (exp1.getTipo() == exp2.getTipo()) {
+				if (exp1.getTipo() == Tipo.FLOAT)
+					p.println("\tfmul");
+				else if (exp1.getTipo() == Tipo.INT) {
+					p.println("\timul");
+				}
+			}else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+				p.println("\tfmul");
+			}
+			break;
+		case "/":
+			if (exp1.getTipo() == exp2.getTipo()) {
+				if (exp1.getTipo() == Tipo.FLOAT)
+					p.println("\tfdiv");
+				else if (exp1.getTipo() == Tipo.INT) {
+					p.println("\tidiv");
+				}
+			}else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+				p.println("\tfdiv");
+			}
+			break;
+		case "%":
+			if ((exp1.getTipo() == exp2.getTipo()) && exp1.getTipo() == Tipo.INT)
+				p.println("\tirem");
+			break;
+		}
+
 		return null;
 	}
 

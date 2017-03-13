@@ -45,7 +45,7 @@ public class Atribuicao implements Comando {
 			p.printf("\tfstore_%d\n\n", pos);
 			break;
 		case CHAR:
-			p.printf("\tastore_%d\n\n", pos);
+			p.printf("\tistore_%d\n\n", pos);
 			break;
 		}
 
