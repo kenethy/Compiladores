@@ -31,20 +31,20 @@ public class Decisao implements Comando {
 	public Boolean verificarSemantica() {
 		this.expressao.verificarSemantica();
 		Boolean r = false;
-		if (this.expressao.getTipo() == Tipo.BOOLEAN){
+		if (this.expressao.getTipo() == Tipo.BOOLEAN) {
 			if (this.comandoIf.verificarSemantica() == true)
 				r = true;
 		}
-		if(comandoElse == null){
+		if (comandoElse == null) {
 			return r;
 		}
-		if (comandoElse != null && r==true){
-				if(this.comandoElse.verificarSemantica() == true){
-					return true;
-				}else{
-					System.out.println("Semantica do ELSE incorreta");
-					return false;
-				}
+		if (comandoElse != null && r == true) {
+			if (this.comandoElse.verificarSemantica() == true) {
+				return true;
+			} else {
+				System.out.println("Semantica do ELSE incorreta");
+				return false;
+			}
 		}
 		System.out.println("Semantica de IF incorreta");
 		return false;

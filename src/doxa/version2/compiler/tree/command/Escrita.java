@@ -14,8 +14,8 @@ public class Escrita implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		for (int i=0; i<listaExpressoes.size(); i++){
-			if(!listaExpressoes.get(i).verificarSemantica())
+		for (int i = 0; i < listaExpressoes.size(); i++) {
+			if (!listaExpressoes.get(i).verificarSemantica())
 				return false;
 		}
 		return true;

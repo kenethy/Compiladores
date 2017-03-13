@@ -795,7 +795,5 @@ public class Lexer implements java_cup.runtime.Scanner {
           }
       }
     }
-  }
-
-
+	}
 }

@@ -24,7 +24,7 @@ public class Bloco implements Comando {
 		Boolean r = true;
 		for (int i = 0; i < comandos.size(); i++) {
 			r = comandos.get(i).verificarSemantica();
-			if (!r){
+			if (!r) {
 				break;
 			}
 		}
@@ -33,7 +33,7 @@ public class Bloco implements Comando {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
-		for (int i = 0; i < comandos.size(); i++){
+		for (int i = 0; i < comandos.size(); i++) {
 			comandos.get(i).gerarCodigo(p);
 		}
 		return null;

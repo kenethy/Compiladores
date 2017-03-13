@@ -47,9 +47,8 @@ public class DeclVariavel implements Comando, DeclGlobal {
 	}
 
 	public void defTipoJ() {
-		switch (this.tipo) { // define a letra do tipo para ser usado na geração
-								// de codigo
-
+		switch (this.tipo) { 
+		// define a letra do tipo para ser usado na geração de codigo
 		case INT:
 			this.tipoJ = "I";
 			break;
@@ -61,8 +60,8 @@ public class DeclVariavel implements Comando, DeclGlobal {
 			break;
 		}
 	}
-	
-	public int getIndice(String id){
+
+	public int getIndice(String id) {
 		return this.indiceLocal.get(idents.indexOf(id));
 	}
 
@@ -85,7 +84,6 @@ public class DeclVariavel implements Comando, DeclGlobal {
 				}
 			}
 		}
-
 		return true;
 	}
 
@@ -98,10 +96,10 @@ public class DeclVariavel implements Comando, DeclGlobal {
 		} else { // decl local
 			// nextIndice();
 			for (int i = 0; i < idents.size(); i++) {
-				SymbolTable.getInstance().putLocal(idents.get(i), indiceLocal.get(i)); // para saber o índice da variável local no array de Variáveis Locais do JVM 
+				// para saber o índice da variável local no array de Variáveis Locais do JVM
+				SymbolTable.getInstance().putLocal(idents.get(i), indiceLocal.get(i));
 			}
 		}
 		return null;
 	}
-
 }

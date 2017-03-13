@@ -1,4 +1,4 @@
-package doxa.version2.compiler.tree.command;	
+package doxa.version2.compiler.tree.command;
 
 import java.io.PrintStream;
 
@@ -17,9 +17,9 @@ public class Retorno implements Comando {
 	public Boolean verificarSemantica() {
 		if (!expressao.verificarSemantica())
 			return false;
-		if(expressao.getTipo() == SymbolTable.getInstance().getTipoAtual())
+		if (expressao.getTipo() == SymbolTable.getInstance().getTipoAtual())
 			return true;
-		else{
+		else {
 			System.out.println("Tipo incompatível com o retorno da função.");
 			return false;
 		}

@@ -11,7 +11,6 @@ public class FloatLiteral implements Expressao {
 		this.floatLiteral = floatLiteral;
 	}
 
-	
 	@Override
 	public Boolean verificarSemantica() {
 		return true;
@@ -22,10 +21,9 @@ public class FloatLiteral implements Expressao {
 		return Tipo.FLOAT;
 	}
 
-
 	@Override
 	public String gerarCodigo(PrintStream p) {
-		p.printf("\tldc %s\n",floatLiteral);
+		p.printf("\tldc %s\n", floatLiteral);
 		return null;
 	}
 }

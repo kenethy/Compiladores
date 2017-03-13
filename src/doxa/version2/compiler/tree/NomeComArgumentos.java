@@ -52,18 +52,16 @@ public class NomeComArgumentos {
 		return true;
 	}
 
-	public String getTipoCodigo(){
+	public String getTipoCodigo() {
 		String r = "";
 		for (int i = 0; i < listas.size(); i++) {
 			if (listas.get(i) != null) {
 				for (int y = 0; y < listas.get(i).size(); y++) {
 					DeclVariavel declaracao = listas.get(i).get(y);
 					r = r + declaracao.getTipoJ();
-					
 				}
 			}
 		}
-		
 		return r;
 	}
 

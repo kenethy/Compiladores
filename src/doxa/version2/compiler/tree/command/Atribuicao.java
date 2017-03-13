@@ -36,7 +36,7 @@ public class Atribuicao implements Comando {
 	@Override
 	public String gerarCodigo(PrintStream p) {
 		expressao.gerarCodigo(p);
-		int pos = (int)SymbolTable.getInstance().getLocal(identificador);
+		int pos = (int) SymbolTable.getInstance().getLocal(identificador);
 		switch (expressao.getTipo()) {
 		case INT:
 			p.printf("\tistore_%d\n\n", pos);

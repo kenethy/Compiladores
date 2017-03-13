@@ -22,18 +22,17 @@ public class SymbolTable {
 			return instance;
 		}
 		return instance;
-
 	}
-	
-	public void setFDeclGlobal(){
+
+	public void setFDeclGlobal() {
 		this.fDeclGlobal = true;
 	}
-	
-	public void disableFDeclGlobal(){
+
+	public void disableFDeclGlobal() {
 		this.fDeclGlobal = false;
 	}
-	
-	public Boolean isDeclGlobal(){
+
+	public Boolean isDeclGlobal() {
 		if (fDeclGlobal)
 			return true;
 		return false;
@@ -51,15 +50,15 @@ public class SymbolTable {
 		this.hmLocal.clear();
 	}
 
-	public boolean nameExistsGlobal(String name) { // retorna True se o nome
-													// existe na tabela
+	// retorna True se o nome existe na tabela
+	public boolean nameExistsGlobal(String name) {
 		if (hmGlobal.containsKey(name))
 			return true;
 		return false;
 	}
 
-	public boolean nameExistsLocal(String name) { // retorna True se o nome
-													// existe na tabela
+	// retorna True se o nome existe na tabela
+	public boolean nameExistsLocal(String name) {
 		if (hmLocal.containsKey(name))
 			return true;
 		return false;
@@ -83,8 +82,5 @@ public class SymbolTable {
 
 	public void putLocal(String nome, Object objeto) {
 		hmLocal.put(nome, objeto);
-		
-		
 	}
-
 }

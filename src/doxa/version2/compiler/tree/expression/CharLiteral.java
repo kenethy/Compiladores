@@ -22,8 +22,9 @@ public class CharLiteral implements Expressao {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
-		int c = (int) charLiteral.charAt(1); //converter o char para o equivalente no ASCII
-		p.printf("\tldc %d\n",c);
+		// converter o char para o equivalente no ASCII
+		int c = (int) charLiteral.charAt(1);
+		p.printf("\tldc %d\n", c);
 		return null;
 	}
 }

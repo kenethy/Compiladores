@@ -10,7 +10,7 @@ public class IntLiteral implements Expressao {
 	public IntLiteral(Integer intLiteral) {
 		this.intLiteral = intLiteral;
 	}
-	
+
 	@Override
 	public Boolean verificarSemantica() {
 		return true;
@@ -23,7 +23,7 @@ public class IntLiteral implements Expressao {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
-		p.printf("\tldc %s\n",intLiteral);
+		p.printf("\tldc %s\n", intLiteral);
 		return null;
 	}
 }

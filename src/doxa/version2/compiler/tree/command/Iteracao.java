@@ -17,9 +17,9 @@ public class Iteracao implements Comando {
 
 	@Override
 	public Boolean verificarSemantica() {
-		if(!expressao.verificarSemantica())
+		if (!expressao.verificarSemantica())
 			return false;
-		if(!comando.verificarSemantica())
+		if (!comando.verificarSemantica())
 			return false;
 		return true;
 	}

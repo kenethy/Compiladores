@@ -79,7 +79,7 @@ public class ExprAritmetica implements Expressao {
 					p.println("\tiadd");
 				}
 			} else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT)
-					p.println("\tiadd");
+				p.println("\tiadd");
 			else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 				p.println("\tfadd");
 			}
@@ -91,7 +91,7 @@ public class ExprAritmetica implements Expressao {
 				else if (exp1.getTipo() == Tipo.INT) {
 					p.println("\tisub");
 				}
-			}else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT) 
+			} else if (exp1.getTipo() == Tipo.CHAR && exp2.getTipo() == Tipo.INT)
 				p.println("\tisub");
 			else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 				p.println("\tfsub");
@@ -104,7 +104,7 @@ public class ExprAritmetica implements Expressao {
 				else if (exp1.getTipo() == Tipo.INT) {
 					p.println("\timul");
 				}
-			}else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+			} else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 				p.println("\tfmul");
 			}
 			break;
@@ -115,7 +115,7 @@ public class ExprAritmetica implements Expressao {
 				else if (exp1.getTipo() == Tipo.INT) {
 					p.println("\tidiv");
 				}
-			}else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
+			} else if (exp1.getTipo() == Tipo.FLOAT && exp2.getTipo() == Tipo.INT) {
 				p.println("\tfdiv");
 			}
 			break;

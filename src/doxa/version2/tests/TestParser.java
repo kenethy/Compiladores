@@ -44,7 +44,8 @@ public class TestParser {
 			
 			p.gerarCodigo("Codigo.j");
 			
-			Runtime.getRuntime().exec("cmd /c start jasmin.bat"); //pra rodar o jasmin, compilar o .J e executar o .class com o Java
+			//pra rodar o jasmin, compilar o .J e executar o .class com o Java
+			Runtime.getRuntime().exec("cmd /c start jasmin.bat"); 
 			
 			System.out.println("Saida: " + p);
 		
@@ -52,7 +53,5 @@ public class TestParser {
 			System.out.println("Erro");
 			e.printStackTrace();
 		}
-
 	}
-
 }
