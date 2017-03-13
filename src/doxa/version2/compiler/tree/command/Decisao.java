@@ -52,6 +52,15 @@ public class Decisao implements Comando {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		expressao.gerarCodigo(p);
+		/*p.println("comandoIf:");
+		comandoIf.gerarCodigo(p);
+		p.println("goto pularElse");
+		p.println("comandoElse:");
+		if(comandoElse!=null){
+			comandoElse.gerarCodigo(p);
+			p.println("pularElse:");
+		}*/
 		return null;
 	}
 

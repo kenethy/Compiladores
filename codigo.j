@@ -16,6 +16,31 @@
 	imul
 	istore_1
 
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 79
+	invokevirtual java/io/PrintStream/print(C)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 32
+	invokevirtual java/io/PrintStream/print(C)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 56
+	invokevirtual java/io/PrintStream/print(I)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 32
+	invokevirtual java/io/PrintStream/print(C)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 16.7
+	invokevirtual java/io/PrintStream/print(F)V
+
+	iload_0
+	iload_1
+	if_icmpeq equal0
+	iconst_0
+	goto depoisE0
+equal0:
+ 	iconst_1
+depoisE0:
+
 	return
 .end method
 
