@@ -17,12 +17,12 @@ public class ExprRelacional implements Expressao {
 		this.expr2 = expr2;
 		this.operador = operador;
 	}
-	
-	public void nextLabelCount(){
+
+	public void nextLabelCount() {
 		labelCount++;
 	}
-	
-	public int getLabelCount(){
+
+	public int getLabelCount() {
 		int r = labelCount;
 		return r;
 	}
@@ -69,92 +69,91 @@ public class ExprRelacional implements Expressao {
 		expr2.gerarCodigo(p);
 		switch (this.operador) {
 		case "=":
-			if (expr1.getTipo() == Tipo.INT ||  expr1.getTipo() == Tipo.CHAR) {
-				p.println("\tif_icmpeq equal"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisE"+getLabelCount());
-				p.println("equal"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisE"+getLabelCount()+":\n");
+			if (expr1.getTipo() == Tipo.INT || expr1.getTipo() == Tipo.CHAR) {
+				p.println("\tif_icmpeq equal" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisE" + getLabelCount());
+				p.println("equal" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisE" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tifeq equal"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisE"+getLabelCount());
-				p.println("equal"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisE"+getLabelCount()+":\n");
+				p.println("\tifeq equal" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisE" + getLabelCount());
+				p.println("equal" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisE" + getLabelCount() + ":\n");
 			}
 			break;
 		case ">":
 			if (expr1.getTipo() == Tipo.INT) {
-				p.println("\tif_icmpgt greater"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisG"+getLabelCount());
-				p.println("greater"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisG"+getLabelCount()+":\n");
+				p.println("\tif_icmpgt greater" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisG" + getLabelCount());
+				p.println("greater" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisG" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tifgt greater"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisG"+getLabelCount());
-				p.println("greater"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisG"+getLabelCount()+":\n");
+				p.println("\tifgt greater" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisG" + getLabelCount());
+				p.println("greater" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisG" + getLabelCount() + ":\n");
 			}
 			break;
 		case "<":
 			if (expr1.getTipo() == Tipo.INT) {
-				p.println("\tif_icmplt less"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisL"+getLabelCount());
-				p.println("less"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisL"+getLabelCount()+":\n");
+				p.println("\tif_icmplt less" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisL" + getLabelCount());
+				p.println("less" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisL" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tiflt less"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisL"+getLabelCount());
-				p.println("less"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisL"+getLabelCount()+":\n");
+				p.println("\tiflt less" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisL" + getLabelCount());
+				p.println("less" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisL" + getLabelCount() + ":\n");
 			}
 			break;
 		case ">=":
 			if (expr1.getTipo() == Tipo.INT) {
-				p.println("\tif_icmpge greaterEQ"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisGE"+getLabelCount());
-				p.println("greaterEQ"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisGE"+getLabelCount()+":\n");
+				p.println("\tif_icmpge greaterEQ" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisGE" + getLabelCount());
+				p.println("greaterEQ" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisGE" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tifge greaterEQ"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisGE"+getLabelCount());
-				p.println("greaterEQ"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisGE"+getLabelCount()+":\n");
+				p.println("\tifge greaterEQ" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisGE" + getLabelCount());
+				p.println("greaterEQ" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisGE" + getLabelCount() + ":\n");
 			}
 			break;
 		case "<=":
 			if (expr1.getTipo() == Tipo.INT) {
-				p.println("\tif_icmple lessEq"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisLE"+getLabelCount());
-				p.println("lessEq"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisLE"+getLabelCount()+":\n");
+				p.println("\tif_icmple lessEq" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisLE" + getLabelCount());
+				p.println("lessEq" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisLE" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tifle lessEq"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisLE"+getLabelCount());
-				p.println("lessEq"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisLE"+getLabelCount()+":\n");
+				p.println("\tifle lessEq" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisLE" + getLabelCount());
+				p.println("lessEq" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisLE" + getLabelCount() + ":\n");
 			}
 			break;
 		case "<>":
 			if (expr1.getTipo() == Tipo.INT || expr1.getTipo() == Tipo.CHAR) {
-				p.println("\tif_icmpne nigual"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisNE"+getLabelCount());
-				p.println("nigual"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisNE"+getLabelCount()+":\n");
+				p.println("\tif_icmpne nigual" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisNE" + getLabelCount());
+				p.println("nigual" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisNE" + getLabelCount() + ":\n");
 			} else if (expr1.getTipo() == Tipo.FLOAT) {
 				p.println("\tfcmpg");
-				p.println("\tifne nigual"+getLabelCount());
-				p.println("\ticonst_0\n\tgoto depoisNE"+getLabelCount());
-				p.println("nigual"+getLabelCount()+":\n \ticonst_1");
-				p.println("depoisNE"+getLabelCount()+":\n");
+				p.println("\tifne nigual" + getLabelCount());
+				p.println("\ticonst_0\n\tgoto depoisNE" + getLabelCount());
+				p.println("nigual" + getLabelCount() + ":\n \ticonst_1");
+				p.println("depoisNE" + getLabelCount() + ":\n");
 			}
 			break;
 		}
 		nextLabelCount();
 		return null;
 	}
-
 }

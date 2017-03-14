@@ -27,12 +27,12 @@ public class Decisao implements Comando {
 		this.expressao = expr;
 		this.comandoIf = cmdIf;
 	}
-	
-	public void nextLabelCount(){
+
+	public void nextLabelCount() {
 		labelCount++;
 	}
-	
-	public int getLabelCount(){
+
+	public int getLabelCount() {
 		int r = labelCount;
 		return r;
 	}
@@ -63,15 +63,17 @@ public class Decisao implements Comando {
 	@Override
 	public String gerarCodigo(PrintStream p) {
 		expressao.gerarCodigo(p);
-		p.println("comandoIf"+getLabelCount()+":");
-		p.println("\tifeq comandoElse"+getLabelCount()); //se for 0 que está no topo da pilha (vindo da execução da expr) quer dizer que a verificação deu falso, então pula pro else
+		p.println("comandoIf" + getLabelCount() + ":");
+		// se for 0 que está no topo da pilha (vindo da execução da expr) quer
+		// dizer que a verificação deu falso, então pula pro else
+		p.println("\tifeq comandoElse" + getLabelCount());
 		comandoIf.gerarCodigo(p);
-		p.println("\tgoto pularElse"+getLabelCount());
-		p.println("comandoElse"+getLabelCount()+":");
-		if(comandoElse!=null){
+		p.println("\tgoto pularElse" + getLabelCount());
+		p.println("comandoElse" + getLabelCount() + ":");
+		if (comandoElse != null) {
 			comandoElse.gerarCodigo(p);
 		}
-		p.println("pularElse"+getLabelCount()+":");
+		p.println("pularElse" + getLabelCount() + ":");
 		nextLabelCount();
 		return null;
 	}

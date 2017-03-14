@@ -24,9 +24,10 @@ public class Escrita implements Comando {
 	@Override
 	public String gerarCodigo(PrintStream p) {
 		for (int i = 0; i < listaExpressoes.size(); i++) {
-			p.println("\tgetstatic java/lang/System/out Ljava/io/PrintStream;"); //carregar classe de imprimir na saída padrao JVM
+			// carregar classe de imprimir na saída padrao JVM
+			p.println("\tgetstatic java/lang/System/out Ljava/io/PrintStream;");
 			listaExpressoes.get(i).gerarCodigo(p);
-			switch(listaExpressoes.get(i).getTipo()){
+			switch (listaExpressoes.get(i).getTipo()) {
 			case INT:
 				p.println("\tinvokevirtual java/io/PrintStream/print(I)V");
 				break;

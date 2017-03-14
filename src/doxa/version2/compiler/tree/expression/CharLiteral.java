@@ -24,10 +24,15 @@ public class CharLiteral implements Expressao {
 	public String gerarCodigo(PrintStream p) {
 		// converter o char para o equivalente no ASCII
 		int c = (int) charLiteral.charAt(1);
-		if (charLiteral.equals("'\\n'")) { // caso especial para pular linha
+
+		// caso especial para pular linha
+		if (charLiteral.equals("'\\n'")) {
 			p.print("\tldc 10\n");
-		} else if ((charLiteral.equals("'\\t'"))) { // caso especial para tabulação
+
+			// caso especial para tabulação
+		} else if ((charLiteral.equals("'\\t'"))) {
 			p.print("\tldc 09\n");
+
 		} else
 			p.printf("\tldc %d\n", c);
 		return null;

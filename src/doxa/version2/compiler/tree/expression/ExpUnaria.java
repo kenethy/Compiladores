@@ -14,12 +14,12 @@ public class ExpUnaria implements Expressao {
 		this.operacao = operacao;
 		this.expr = expr;
 	}
-	
-	public void nextLabelCount(){
+
+	public void nextLabelCount() {
 		labelCount++;
 	}
-	
-	public int getLabelCount(){
+
+	public int getLabelCount() {
 		int r = labelCount;
 		return r;
 	}
@@ -50,21 +50,21 @@ public class ExpUnaria implements Expressao {
 
 	public String gerarCodigo(PrintStream p) {
 		expr.gerarCodigo(p);
-		switch (operacao){
+		switch (operacao) {
 		case "-":
-			if(tipo == Tipo.FLOAT){
+			if (tipo == Tipo.FLOAT) {
 				p.println("\tfneg");
-			}else if(tipo == Tipo.INT){
+			} else if (tipo == Tipo.INT) {
 				p.println("\tineg");
 			}
 			break;
 		case "not":
-			if(tipo == Tipo.BOOLEAN){
-				p.println("\tifeq pTrue"+getLabelCount());
+			if (tipo == Tipo.BOOLEAN) {
+				p.println("\tifeq pTrue" + getLabelCount());
 				p.println("\ticonst_0");
-				p.println("\tgoto jumpPTrue"+getLabelCount());
-				p.println("pTrue"+getLabelCount()+":\n\ticonst_1");
-				p.println("jumpPTrue"+getLabelCount()+":");
+				p.println("\tgoto jumpPTrue" + getLabelCount());
+				p.println("pTrue" + getLabelCount() + ":\n\ticonst_1");
+				p.println("jumpPTrue" + getLabelCount() + ":");
 			}
 			break;
 		}

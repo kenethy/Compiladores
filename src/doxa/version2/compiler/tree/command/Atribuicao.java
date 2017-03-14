@@ -48,7 +48,6 @@ public class Atribuicao implements Comando {
 			p.printf("\tistore_%d\n\n", pos);
 			break;
 		}
-
 		return null;
 	}
 
