@@ -39,13 +39,13 @@ public class TestParser {
 			Symbol output = parser.parse();
 			
 			Programa p = (Programa) output.value;
-			if (p.verificarSemantica())
+			if (p.verificarSemantica()){
 				System.out.println("Semantica OK");
-			
-			p.gerarCodigo("Codigo.j");
-			
-			//pra rodar o jasmin, compilar o .J e executar o .class com o Java
-			Runtime.getRuntime().exec("cmd /c start jasmin.bat"); 
+				p.gerarCodigo("Codigo.j");
+
+				//pra rodar o jasmin, compilar o .J e executar o .class com o Java
+				Runtime.getRuntime().exec("cmd /c start jasmin.bat"); 
+			}
 			
 			System.out.println("Saida: " + p);
 		

@@ -9,6 +9,7 @@ public class Decisao implements Comando {
 	private Expressao expressao;
 	private Comando comandoIf;
 	private Comando comandoElse;
+	private static int labelCount;
 
 	/**
 	 * Construtor para if-else completo.
@@ -25,6 +26,15 @@ public class Decisao implements Comando {
 	public Decisao(Expressao expr, Comando cmdIf) {
 		this.expressao = expr;
 		this.comandoIf = cmdIf;
+	}
+	
+	public void nextLabelCount(){
+		labelCount++;
+	}
+	
+	public int getLabelCount(){
+		int r = labelCount;
+		return r;
 	}
 
 	@Override
@@ -53,14 +63,16 @@ public class Decisao implements Comando {
 	@Override
 	public String gerarCodigo(PrintStream p) {
 		expressao.gerarCodigo(p);
-		/*p.println("comandoIf:");
+		p.println("comandoIf"+getLabelCount()+":");
+		p.println("\tifeq comandoElse"+getLabelCount()); //se for 0 que está no topo da pilha (vindo da execução da expr) quer dizer que a verificação deu falso, então pula pro else
 		comandoIf.gerarCodigo(p);
-		p.println("goto pularElse");
-		p.println("comandoElse:");
+		p.println("\tgoto pularElse"+getLabelCount());
+		p.println("comandoElse"+getLabelCount()+":");
 		if(comandoElse!=null){
 			comandoElse.gerarCodigo(p);
-			p.println("pularElse:");
-		}*/
+		}
+		p.println("pularElse"+getLabelCount()+":");
+		nextLabelCount();
 		return null;
 	}
 

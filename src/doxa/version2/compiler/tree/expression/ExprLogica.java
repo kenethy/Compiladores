@@ -36,6 +36,17 @@ public class ExprLogica implements Expressao {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		exp1.gerarCodigo(p);
+		exp2.gerarCodigo(p);
+		switch (operLogico){
+		case "and":
+			p.println("\tiand");
+			break;
+		case"or":
+			p.println("\tior");
+			break;
+				
+		}
 		return null;
 	}
 

@@ -5,8 +5,10 @@ proc main(){
 	de divisao inexata). Assim, numeros impares ficarao
 	com uma unidade a menos do que seu valor inicial. <<
 	nRebuilt := (n / 2) * 2;
-	prnt('O',' ',56,' ',16.7);
-	if (n = nRebuilt){
+	if((2>2) or not(1=1)){
+		prnt('1','n','\n');
+	}
+	if (not(n = nRebuilt)){
 		 prnt('P', 'A', 'R');
 	}
 	else{

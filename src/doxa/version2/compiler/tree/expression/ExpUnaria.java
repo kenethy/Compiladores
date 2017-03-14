@@ -8,10 +8,20 @@ public class ExpUnaria implements Expressao {
 	private Expressao expr;
 	private String operacao;
 	private Tipo tipo;
+	private static int labelCount;
 
 	public ExpUnaria(String operacao, Expressao expr) {
 		this.operacao = operacao;
 		this.expr = expr;
+	}
+	
+	public void nextLabelCount(){
+		labelCount++;
+	}
+	
+	public int getLabelCount(){
+		int r = labelCount;
+		return r;
 	}
 
 	@Override
@@ -39,6 +49,26 @@ public class ExpUnaria implements Expressao {
 	}
 
 	public String gerarCodigo(PrintStream p) {
+		expr.gerarCodigo(p);
+		switch (operacao){
+		case "-":
+			if(tipo == Tipo.FLOAT){
+				p.println("\tfneg");
+			}else if(tipo == Tipo.INT){
+				p.println("\tineg");
+			}
+			break;
+		case "not":
+			if(tipo == Tipo.BOOLEAN){
+				p.println("\tifeq pTrue"+getLabelCount());
+				p.println("\ticonst_0");
+				p.println("\tgoto jumpPTrue"+getLabelCount());
+				p.println("pTrue"+getLabelCount()+":\n\ticonst_1");
+				p.println("jumpPTrue"+getLabelCount()+":");
+			}
+			break;
+		}
+		nextLabelCount();
 		return null;
 	}
 }
