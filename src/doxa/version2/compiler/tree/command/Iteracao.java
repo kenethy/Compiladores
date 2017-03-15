@@ -9,10 +9,15 @@ public class Iteracao implements Comando {
 
 	private Expressao expressao;
 	private Comando comando;
+	private static int countLabel = 0;
 
 	public Iteracao(Expressao expressao, Comando comando) {
 		this.expressao = expressao;
 		this.comando = comando;
+	}
+
+	public void nextLabel() {
+		countLabel++;
 	}
 
 	@Override
@@ -26,9 +31,16 @@ public class Iteracao implements Comando {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		p.println("while" + countLabel + ":");
+		expressao.gerarCodigo(p);
+		p.println("\tifeq done" + countLabel);
+		comando.gerarCodigo(p);
+		p.println("\tgoto while" + countLabel);
+		p.println("done" + countLabel + ":");
+		nextLabel();
 		return null;
 	}
-	
+
 	public Boolean hasReturn() {
 		return comando.hasReturn();
 	}

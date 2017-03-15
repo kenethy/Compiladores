@@ -1,30 +1,50 @@
 .class public Codigo
 .super java/lang/Object
 
+.field private static n I 
+.field private static soma I 
 
-.method public static mdcDe$e(II)I
+.method public static soma$primeirosImpares(I)I
 	.limit locals 10
 	.limit stack 10
 
-	iload_1
 	ldc 0
-	if_icmpeq equal0
-	iconst_0
-	goto depoisE0
-equal0:
- 	iconst_1
-depoisE0:
+	istore_3
 
-comandoIf0:
-	ifeq comandoElse0
-	iload_0
-	ireturn
-comandoElse0:
+	ldc 0
+	istore_1
+
+while0:
 	iload_1
 	iload_0
+	if_icmplt less0
+	iconst_0
+	goto depoisL0
+less0:
+ 	iconst_1
+depoisL0:
+
+	ifeq done0
+	ldc 2
 	iload_1
-	irem
-	invokestatic Codigo/mdcDe$e(II)I
+	imul
+	ldc 1
+	iadd
+	istore_2
+
+	iload_3
+	iload_2
+	iadd
+	istore_3
+
+	iload_1
+	ldc 1
+	iadd
+	istore_1
+
+	goto while0
+done0:
+	iload_3
 	ireturn
 .end method
 
@@ -32,51 +52,12 @@ comandoElse0:
 	.limit locals 10
 	.limit stack 10
 
-	ldc 15
+	ldc 9
+	invokestatic Codigo/soma$primeirosImpares(I)I
 	istore_0
 
-	ldc 5
-	istore_1
-
-	iload_0
-	iload_1
-	invokestatic Codigo/mdcDe$e(II)I
-	istore_2
-
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 109
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 100
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 99
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 40
-	invokevirtual java/io/PrintStream/print(C)V
-
 	getstatic java/lang/System/out Ljava/io/PrintStream;
 	iload_0
-	invokevirtual java/io/PrintStream/print(I)V
-
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 44
-	invokevirtual java/io/PrintStream/print(C)V
-
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	iload_1
-	invokevirtual java/io/PrintStream/print(I)V
-
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 41
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 58
-	invokevirtual java/io/PrintStream/print(C)V
-
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	iload_2
 	invokevirtual java/io/PrintStream/print(I)V
 
 	return

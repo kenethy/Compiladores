@@ -1,21 +1,19 @@
-proc mdcDe(x - int)e(y - int) - int{
-	if (y = 0) {
-		return x;
-	} else {
-		return mdcDe(y)e(x % y);
+var n, soma - int;
+
+proc soma(n - int)primeirosImpares() - int{
+	var i, proxImpar, resultado - int;
+	resultado := 0;
+	i := 0;
+	while (i < n) {
+		proxImpar := 2*i + 1; ** o i-esimo impar positivo
+		resultado := resultado + proxImpar;
+		i := i + 1;
 	}
+	return resultado;
 }
 
 proc main(){
-	var x, y - int;
-	var m - int;
-	x := 15; >> dois valores a partir dos quais <<
-	y := 5; >> sera calculado o m.d.c. <<
-	m := mdcDe (x) e (y);
-	prnt('m', 'd', 'c', '(');
-	prnt( x );
-	prnt(',');
-	prnt( y );
-	prnt(')', ':');
-	prnt( m );
+	var result - int;
+	result := soma(9)primeirosImpares();
+	prnt(result);
 }
