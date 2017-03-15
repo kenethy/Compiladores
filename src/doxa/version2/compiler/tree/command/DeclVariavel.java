@@ -4,16 +4,17 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 
 import doxa.version2.compiler.tree.DeclGlobal;
+import doxa.version2.compiler.tree.NomeComArgumentos;
 import doxa.version2.compiler.tree.Tipo;
 import symbolTable.SymbolTable;
 
 public class DeclVariavel implements Comando, DeclGlobal {
 	private LinkedList<String> idents;
 	private Tipo tipo;
-	private Boolean isGlobal;
+	private Boolean isGlobal = false;
 	private String tipoJ;
 	private LinkedList<Integer> indiceLocal = new LinkedList<Integer>();
-	private static int countIndice = 0;
+	private static int countIndice;
 
 	public DeclVariavel() {
 		this.idents = new LinkedList<String>();
@@ -47,7 +48,7 @@ public class DeclVariavel implements Comando, DeclGlobal {
 	}
 
 	public void defTipoJ() {
-		switch (this.tipo) { 
+		switch (this.tipo) {
 		// define a letra do tipo para ser usado na geração de codigo
 		case INT:
 			this.tipoJ = "I";
@@ -67,6 +68,7 @@ public class DeclVariavel implements Comando, DeclGlobal {
 
 	@Override
 	public Boolean verificarSemantica() {
+		countIndice = SymbolTable.getInstance().getCountIndiceVar();
 		for (int i = 0; i < idents.size(); i++) {
 			if (SymbolTable.getInstance().nameExistsLocal(idents.get(i))) {
 				System.out.println("Variável duplicada.");
@@ -80,6 +82,7 @@ public class DeclVariavel implements Comando, DeclGlobal {
 					SymbolTable.getInstance().putLocal(idents.get(i), tipo);
 					indiceLocal.add(countIndice);
 					nextIndice();
+					SymbolTable.getInstance().setCountIndiceVar(countIndice);
 					isGlobal = false;
 				}
 			}
@@ -89,17 +92,23 @@ public class DeclVariavel implements Comando, DeclGlobal {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
-		if (isGlobal) { // .field private static Nome Tipo
+
+		if (isGlobal) {
 			for (int i = 0; i < idents.size(); i++) {
 				p.printf(".field private static %s %s \n", this.idents.get(i), this.getTipoJ());
 			}
 		} else { // decl local
 			// nextIndice();
 			for (int i = 0; i < idents.size(); i++) {
-				// para saber o índice da variável local no array de Variáveis Locais do JVM
+				// para saber o índice da variável local no array de Variáveis
+				// Locais do JVM
 				SymbolTable.getInstance().putLocal(idents.get(i), indiceLocal.get(i));
 			}
 		}
 		return null;
+	}
+	
+	public Boolean hasReturn() {
+		return false;
 	}
 }

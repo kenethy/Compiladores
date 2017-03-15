@@ -1,5 +1,6 @@
 package doxa.version2.compiler.tree;
 
+import java.io.PrintStream;
 import java.util.LinkedList;
 
 import doxa.version2.compiler.tree.command.DeclVariavel;
@@ -8,6 +9,7 @@ import symbolTable.SymbolTable;
 public class NomeComArgumentos {
 	private LinkedList<LinkedList<DeclVariavel>> listas;
 	private String identificador;
+	private int qtdArgs = 0;
 
 	public NomeComArgumentos(String identificar, LinkedList<DeclVariavel> paramFormais) {
 		this.listas = new LinkedList<LinkedList<DeclVariavel>>();
@@ -27,6 +29,10 @@ public class NomeComArgumentos {
 		this.listas.addLast(paramForm);
 	}
 
+	public int getQtdArgs() {
+		return qtdArgs;
+	}
+
 	public Boolean verificarSemantica() {
 		// laço pra iterar cada parentesis na declaração da Função ex.: proc
 		// mdcDe *(* x - int *)* e *(* y - int *)* - int {
@@ -36,6 +42,7 @@ public class NomeComArgumentos {
 				// proc mdcDe(*x - int* , *j - char*)e(y - int) - int {
 				for (int y = 0; y < listas.get(i).size(); y++) {
 					DeclVariavel declaracao = listas.get(i).get(y);
+					qtdArgs++;
 					declaracao.defTipoJ();
 					// getIdents().get(0) o tamanho dessa linkedList, nesse caso
 					// específico, é sempre 1, segundo a gramática. Vide
@@ -44,6 +51,7 @@ public class NomeComArgumentos {
 						System.out.println("Parâmetro duplicado.");
 						return false;
 					} else { // se nao, adiciona na tabela local
+						declaracao.verificarSemantica();
 						SymbolTable.getInstance().putLocal(declaracao.getIdents().get(0), declaracao.getTipo());
 					}
 				}
@@ -69,7 +77,14 @@ public class NomeComArgumentos {
 		return this.listas;
 	}
 
-	public String gerarCodigo(String filename) {
+	public String gerarCodigo(PrintStream p) {
+		for (int i = 0; i < listas.size(); i++) {
+			if (listas.get(i) != null) {
+				for (int y = 0; y < listas.get(i).size(); y++) {
+					listas.get(i).get(y).gerarCodigo(p);
+				}
+			}
+		}
 		return null;
 	}
 }

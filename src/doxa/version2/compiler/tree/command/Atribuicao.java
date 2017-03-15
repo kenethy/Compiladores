@@ -50,5 +50,9 @@ public class Atribuicao implements Comando {
 		}
 		return null;
 	}
+	
+	public Boolean hasReturn() {
+		return false;
+	}
 
 }

@@ -38,4 +38,12 @@ public class Bloco implements Comando {
 		}
 		return null;
 	}
+	
+	public Boolean hasReturn() {
+		for (int i =0; i<comandos.size(); i++){
+			if(comandos.get(i) instanceof Retorno)
+				return true;
+		}
+		return false;
+	}
 }

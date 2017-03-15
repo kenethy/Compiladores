@@ -9,6 +9,7 @@ public class DeclFuncao implements DeclGlobal {
 	private NomeComArgumentos nomesParams;
 	private Bloco bloco;
 	private Tipo tipo;
+	private static int countIndiceVar = 0;
 
 	public DeclFuncao(NomeComArgumentos assinatura, Tipo tipo, Bloco bloco) {
 		this.nomesParams = assinatura;
@@ -33,8 +34,10 @@ public class DeclFuncao implements DeclGlobal {
 			SymbolTable.getInstance().setTipoAtual(this.tipo);
 		}
 		boolean p = this.nomesParams.verificarSemantica() && this.bloco.verificarSemantica();
+		SymbolTable.getInstance().setCountIndiceVar(nomesParams.getQtdArgs());
 		SymbolTable.getInstance().setFDeclGlobal();
 		SymbolTable.getInstance().clearLocal();
+		SymbolTable.getInstance().setCountIndiceVar(0);
 		return (p);
 	}
 
@@ -70,9 +73,10 @@ public class DeclFuncao implements DeclGlobal {
 		if (nomesParams.getId().equals("main")) {
 			p.print("\n.method public static main([Ljava/lang/String;)V\n\t.limit locals 10\n\t.limit stack 10\n\n");
 		} else {
-			p.printf("\n.method public %s(%s)%s\n\t.limit locals 10\n\t.limit stack 10\n\n", nomesParams.getId(),
+			p.printf("\n.method public static %s(%s)%s\n\t.limit locals 10\n\t.limit stack 10\n\n", nomesParams.getId(),
 					nomesParams.getTipoCodigo(), t);
 		}
+		nomesParams.gerarCodigo(p);
 		bloco.gerarCodigo(p);
 		if (tipo == null)
 			p.print("\treturn\n");

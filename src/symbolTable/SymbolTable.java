@@ -9,6 +9,7 @@ public class SymbolTable {
 	private HashMap<String, Object> hmGlobal;
 	private Tipo tipoAtual = null;
 	private Boolean fDeclGlobal = true;
+	private int countIndiceVar = 0;
 	private static SymbolTable instance = null;
 
 	public SymbolTable() {
@@ -22,6 +23,14 @@ public class SymbolTable {
 			return instance;
 		}
 		return instance;
+	}
+
+	public int getCountIndiceVar() {
+		return countIndiceVar;
+	}
+
+	public void setCountIndiceVar(int countIndiceVar) {
+		this.countIndiceVar = countIndiceVar;
 	}
 
 	public void setFDeclGlobal() {

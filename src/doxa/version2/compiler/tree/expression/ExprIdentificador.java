@@ -47,19 +47,19 @@ public class ExprIdentificador implements Expressao {
 			if (isLocal)
 				p.printf("\tiload_%d\n", SymbolTable.getInstance().getLocal(identificador));
 			else
-				p.printf("\tgetstatic Codigo/%s I", identificador);
+				p.printf("\tgetstatic Codigo/%s I\n", identificador);
 			break;
 		case FLOAT:
 			if (isLocal)
 				p.printf("\tfload_%d\n", SymbolTable.getInstance().getLocal(identificador));
 			else
-				p.printf("\tgetstatic Codigo/%s F", identificador);
+				p.printf("\tgetstatic Codigo/%s F\n", identificador);
 			break;
 		case CHAR:
 			if (isLocal)
 				p.printf("\tiload_%d\n", SymbolTable.getInstance().getLocal(identificador));
 			else
-				p.printf("\tgetstatic Codigo/%s C", identificador);
+				p.printf("\tgetstatic Codigo/%s C\n", identificador);
 			break;
 		}
 		return null;

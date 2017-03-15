@@ -28,5 +28,9 @@ public class Iteracao implements Comando {
 	public String gerarCodigo(PrintStream p) {
 		return null;
 	}
+	
+	public Boolean hasReturn() {
+		return comando.hasReturn();
+	}
 
 }

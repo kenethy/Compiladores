@@ -13,6 +13,7 @@ public class ChamadaFunc implements Expressao, Comando {
 	private String identificador;
 	private LinkedList<LinkedList<Expressao>> listas;
 	private Tipo tipo;
+	private String tipoJ;
 
 	public ChamadaFunc(String identificador, LinkedList<Expressao> listaExprs) {
 		this.identificador = identificador;
@@ -28,6 +29,45 @@ public class ChamadaFunc implements Expressao, Comando {
 		this.listas.addLast(listaExpr);
 	}
 
+	public void setTipoJ() {
+		switch (tipo) {
+		case INT:
+			this.tipoJ = "I";
+			break;
+		case FLOAT:
+			this.tipoJ = "F";
+			break;
+		case CHAR:
+			this.tipoJ = "C";
+			break;
+		}
+	}
+
+	public String getTipoCodigo() {
+		String r = "";
+		String tipoJ1 = null;
+		for (int i = 0; i < listas.size(); i++) {
+			if (listas.get(i) != null) {
+				for (int y = 0; y < listas.get(i).size(); y++) {
+					Expressao exp = listas.get(i).get(y);
+					switch (exp.getTipo()) {
+					case INT:
+						tipoJ1 = "I";
+						break;
+					case FLOAT:
+						tipoJ1 = "F";
+						break;
+					case CHAR:
+						tipoJ1 = "C";
+						break;
+					}
+					r = r + tipoJ1;
+				}
+			}
+		}
+		return r;
+	}
+
 	@Override
 	public Boolean verificarSemantica() {
 		DeclFuncao funcao = null;
@@ -39,6 +79,7 @@ public class ChamadaFunc implements Expressao, Comando {
 				if (funcao.getParams().getListas().get(i).size() == listas.get(i).size()) {
 					for (int y = 0; y < funcao.getParams().getListas().get(i).size(); y++) {
 						listas.get(i).get(y).verificarSemantica();
+						setTipoJ();
 						if (funcao.getParams().getListas().get(i).get(y).getTipo() != listas.get(i).get(y).getTipo()) {
 							System.out.println("Ordem dos parametros na chamada da função incorretos");
 							return false;
@@ -64,6 +105,17 @@ public class ChamadaFunc implements Expressao, Comando {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		for (int i = 0; i < listas.size(); i++) {
+			for (int y = 0; y < listas.get(i).size(); y++) {
+				listas.get(i).get(y).gerarCodigo(p);
+			}
+		}
+		p.println("\tinvokestatic " +"Codigo/" + identificador + "(" + getTipoCodigo() + ")" + this.tipoJ);
 		return null;
+	}
+
+	@Override
+	public Boolean hasReturn() {
+		return false;
 	}
 }

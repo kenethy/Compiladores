@@ -1,17 +1,21 @@
+proc mdcDe(x - int)e(y - int) - int{
+	if (y = 0) {
+		return x;
+	} else {
+		return mdcDe(y)e(x % y);
+	}
+}
+
 proc main(){
-	var n, nRebuilt - int;
-	n := 51423; ** numero a ser testado
-	>> A divisao de inteiros arredonda para baixo (em caso
-	de divisao inexata). Assim, numeros impares ficarao
-	com uma unidade a menos do que seu valor inicial. <<
-	nRebuilt := (n / 2) * 2;
-	if((2>2) or not(1=1)){
-		prnt('1','n','\n');
-	}
-	if (not(n = nRebuilt)){
-		 prnt('P', 'A', 'R');
-	}
-	else{
-		prnt('I', 'M', 'P', 'A', 'R');
-	}
+	var x, y - int;
+	var m - int;
+	x := 15; >> dois valores a partir dos quais <<
+	y := 5; >> sera calculado o m.d.c. <<
+	m := mdcDe (x) e (y);
+	prnt('m', 'd', 'c', '(');
+	prnt( x );
+	prnt(',');
+	prnt( y );
+	prnt(')', ':');
+	prnt( m );
 }

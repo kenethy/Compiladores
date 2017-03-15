@@ -2,106 +2,83 @@
 .super java/lang/Object
 
 
+.method public static mdcDe$e(II)I
+	.limit locals 10
+	.limit stack 10
+
+	iload_1
+	ldc 0
+	if_icmpeq equal0
+	iconst_0
+	goto depoisE0
+equal0:
+ 	iconst_1
+depoisE0:
+
+comandoIf0:
+	ifeq comandoElse0
+	iload_0
+	ireturn
+comandoElse0:
+	iload_1
+	iload_0
+	iload_1
+	irem
+	invokestatic Codigo/mdcDe$e(II)I
+	ireturn
+.end method
+
 .method public static main([Ljava/lang/String;)V
 	.limit locals 10
 	.limit stack 10
 
-	ldc 51423
+	ldc 15
 	istore_0
 
-	iload_0
-	ldc 2
-	idiv
-	ldc 2
-	imul
+	ldc 5
 	istore_1
 
-	ldc 2
-	ldc 2
-	if_icmpgt greater0
-	iconst_0
-	goto depoisG0
-greater0:
- 	iconst_1
-depoisG0:
-
-	ldc 1
-	ldc 1
-	if_icmpeq equal1
-	iconst_0
-	goto depoisE1
-equal1:
- 	iconst_1
-depoisE1:
-
-	ifeq pTrue0
-	iconst_0
-	goto jumpPTrue0
-pTrue0:
-	iconst_1
-jumpPTrue0:
-	ior
-comandoIf0:
-	ifeq comandoElse0
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 49
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 110
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 10
-	invokevirtual java/io/PrintStream/print(C)V
-
-	goto pularElse0
-comandoElse0:
-pularElse0:
 	iload_0
 	iload_1
-	if_icmpeq equal2
-	iconst_0
-	goto depoisE2
-equal2:
- 	iconst_1
-depoisE2:
+	invokestatic Codigo/mdcDe$e(II)I
+	istore_2
 
-	ifeq pTrue1
-	iconst_0
-	goto jumpPTrue1
-pTrue1:
-	iconst_1
-jumpPTrue1:
-comandoIf1:
-	ifeq comandoElse1
 	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 80
+	ldc 109
 	invokevirtual java/io/PrintStream/print(C)V
 	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 65
+	ldc 100
 	invokevirtual java/io/PrintStream/print(C)V
 	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 82
+	ldc 99
+	invokevirtual java/io/PrintStream/print(C)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 40
 	invokevirtual java/io/PrintStream/print(C)V
 
-	goto pularElse1
-comandoElse1:
 	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 73
-	invokevirtual java/io/PrintStream/print(C)V
+	iload_0
+	invokevirtual java/io/PrintStream/print(I)V
+
 	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 77
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 80
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 65
-	invokevirtual java/io/PrintStream/print(C)V
-	getstatic java/lang/System/out Ljava/io/PrintStream;
-	ldc 82
+	ldc 44
 	invokevirtual java/io/PrintStream/print(C)V
 
-pularElse1:
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	iload_1
+	invokevirtual java/io/PrintStream/print(I)V
+
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 41
+	invokevirtual java/io/PrintStream/print(C)V
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	ldc 58
+	invokevirtual java/io/PrintStream/print(C)V
+
+	getstatic java/lang/System/out Ljava/io/PrintStream;
+	iload_2
+	invokevirtual java/io/PrintStream/print(I)V
+
 	return
 .end method
 

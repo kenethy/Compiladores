@@ -68,14 +68,20 @@ public class Decisao implements Comando {
 		// dizer que a verificação deu falso, então pula pro else
 		p.println("\tifeq comandoElse" + getLabelCount());
 		comandoIf.gerarCodigo(p);
-		p.println("\tgoto pularElse" + getLabelCount());
+		if (!comandoIf.hasReturn())
+			p.println("\tgoto pularElse" + getLabelCount());
 		p.println("comandoElse" + getLabelCount() + ":");
 		if (comandoElse != null) {
 			comandoElse.gerarCodigo(p);
 		}
-		p.println("pularElse" + getLabelCount() + ":");
+		if (!comandoIf.hasReturn())
+			p.println("pularElse" + getLabelCount() + ":");
 		nextLabelCount();
 		return null;
+	}
+	
+	public Boolean hasReturn() {
+		return comandoIf.hasReturn();
 	}
 
 }

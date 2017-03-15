@@ -27,7 +27,23 @@ public class Retorno implements Comando {
 
 	@Override
 	public String gerarCodigo(PrintStream p) {
+		expressao.gerarCodigo(p);
+		switch (expressao.getTipo()){
+		case INT:
+			p.print("\tireturn\n");
+			break;
+		case FLOAT:
+			p.print("\tfreturn\n");
+			break;
+		case CHAR:
+			p.print("\tcreturn\n");
+			break;
+		}
 		return null;
+	}
+	
+	public Boolean hasReturn() {
+		return true;
 	}
 
 }
