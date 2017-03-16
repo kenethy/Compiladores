@@ -110,7 +110,7 @@ public class ChamadaFunc implements Expressao, Comando {
 				listas.get(i).get(y).gerarCodigo(p);
 			}
 		}
-		p.println("\tinvokestatic " +"Codigo/" + identificador + "(" + getTipoCodigo() + ")" + this.tipoJ);
+		p.println("\tinvokestatic " + "Codigo/" + identificador + "(" + getTipoCodigo() + ")" + this.tipoJ);
 		return null;
 	}
 

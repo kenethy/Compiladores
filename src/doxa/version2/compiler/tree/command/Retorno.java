@@ -28,7 +28,7 @@ public class Retorno implements Comando {
 	@Override
 	public String gerarCodigo(PrintStream p) {
 		expressao.gerarCodigo(p);
-		switch (expressao.getTipo()){
+		switch (expressao.getTipo()) {
 		case INT:
 			p.print("\tireturn\n");
 			break;
@@ -41,7 +41,7 @@ public class Retorno implements Comando {
 		}
 		return null;
 	}
-	
+
 	public Boolean hasReturn() {
 		return true;
 	}

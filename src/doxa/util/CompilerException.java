@@ -1,8 +1,7 @@
 package doxa.util;
 
-
 /**
- * Exceção comum a todas as etapas da compilação. 
+ * Exceção comum a todas as etapas da compilação.
  * 
  * @author Pablo Sampaio
  */

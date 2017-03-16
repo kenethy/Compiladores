@@ -107,7 +107,7 @@ public class DeclVariavel implements Comando, DeclGlobal {
 		}
 		return null;
 	}
-	
+
 	public Boolean hasReturn() {
 		return false;
 	}

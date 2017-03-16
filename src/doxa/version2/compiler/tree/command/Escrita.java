@@ -42,7 +42,7 @@ public class Escrita implements Comando {
 		p.println();
 		return null;
 	}
-	
+
 	public Boolean hasReturn() {
 		return false;
 	}

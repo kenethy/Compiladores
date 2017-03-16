@@ -79,7 +79,7 @@ public class Decisao implements Comando {
 		nextLabelCount();
 		return null;
 	}
-	
+
 	public Boolean hasReturn() {
 		return comandoIf.hasReturn();
 	}
