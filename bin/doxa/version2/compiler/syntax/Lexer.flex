@@ -17,7 +17,7 @@ whiteSpace=([ \n\t\f\r]+)
 identificador=[a-z]([a-zA-Z_]|[0-9])*
 inteiro=[0-9]+
 reais=[0-9]*"."[0-9]+
-caracter = ('[0-9]'|'[a-zA-Z]'|'\\n'|'\\t'|' '|'\ '|':'|'\('|'\)'|',')
+caracter = ('[0-9]'|'[a-zA-Z]'|'\\n'|'\\t'|' '|'\ '|':'|'\('|'\)'|',') //ADICIONAR CARACTER IGUAL
 
 %%
 
