@@ -9,7 +9,7 @@ proc buscaRaizDe(n - float)entre(min - float)e(max - float) - float {
 
     if ((dif >= -0.0001) and (dif <= 0.0001)) {  	**testa se deu igual, com margem de erro de 4 digitos
         return raiz;
-    } else if (dif < 0) { 							**a raiz eh menor do que deveria
+    } else if (dif < 0.0) { 							**a raiz eh menor do que deveria
         return buscaRaizDe(n)entre(raiz)e(max);  	**busca uma maior
     } else {
         return buscaRaizDe(n)entre(min)e(raiz);  	**busca uma menor
@@ -20,14 +20,14 @@ proc raizDe(n - float) - float {
     if ((n = 0.0) or (n = 1.0)) {
         return n;
     } else {
-        return buscaRaizDe(n)entre(0)e(n);
+        return buscaRaizDe(n)entre(0.0)e(n);
     }
 }
 
 proc main() {
-    var i - int;
-    i := 0;
-    while (i <= 10) {
+    var i - float;
+    i := 0.0;
+    while (i <= 10.0) {
         prnt('r', 'a', 'i', 'z', ' ');
         prnt(i);
         prnt(' '); prnt(':'); prnt(' ');
