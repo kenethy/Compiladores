@@ -1,27 +1,16 @@
 
-** busca alguma raiz para n, no intervalo [min; max]
-proc buscaRaizDe(n - float)entre(min - float)e(max - float) - float {
-    var dif - float;
-    var raiz - float;
-
-    raiz := (min+max) / 2.0;  							**proposta de raiz: metade do max e min
-    dif := (raiz*raiz) - n;   							**para testar se, com esta suposta raiz, o resultado da maior/menor/igual 
-
-    if ((dif >= -0.00001) and (dif <= 0.00001)) {  	**testa se deu igual, com margem de erro de 4 digitos
-        return raiz;
-    } else if (dif < 0.0) { 							**a raiz eh menor do que deveria
-        return buscaRaizDe(n)entre(raiz)e(max);  		**busca uma maior
-    } else {
-        return buscaRaizDe(n)entre(min)e(raiz);  		**busca uma menor
+proc raizDe(num - float) - float {
+    var n - int;
+    var r - float;
+    
+    n := 0;
+    r := num;
+    while(n < 10) {
+    	r := r/2.0 + num/(2.0*r);
+    	n := n + 1;
     }
-}
-
-proc raizDe(n - float) - float {
-    if ((n = 0.0) or (n = 1.0)) {
-        return n;
-    } else {
-        return buscaRaizDe(n)entre(0.0)e(n);
-    }
+    
+    return r;
 }
 
 proc calculoX1 (a - float, b - float, c - float, delta - float) - float {
@@ -69,8 +58,8 @@ proc main() {
 	
 	
 	a := 1.0;
-	b := 15.0;
-	c := 9.0;
+	b := 1.0;
+	c := -2.0;
 	
 	d := calcDelta(a,b,c);
 	
