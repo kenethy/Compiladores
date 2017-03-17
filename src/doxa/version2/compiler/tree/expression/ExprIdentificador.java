@@ -45,13 +45,13 @@ public class ExprIdentificador implements Expressao {
 		switch (tipo) {
 		case INT:
 			if (isLocal)
-				p.printf("\tiload_%d\n", SymbolTable.getInstance().getLocal(identificador));
+				p.printf("\tiload %d\n", SymbolTable.getInstance().getLocal(identificador));
 			else
 				p.printf("\tgetstatic Codigo/%s I\n", identificador);
 			break;
 		case FLOAT:
 			if (isLocal)
-				p.printf("\tfload_%d\n", SymbolTable.getInstance().getLocal(identificador));
+				p.printf("\tfload %d\n", SymbolTable.getInstance().getLocal(identificador));
 			else
 				p.printf("\tgetstatic Codigo/%s F\n", identificador);
 			break;

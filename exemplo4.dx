@@ -33,6 +33,10 @@ proc main() {
         prnt(' '); prnt(':'); prnt(' ');
         prnt( raizDe(i) );
         prnt('\n');
+<<<<<<< HEAD
 		i := i + 1.0;
+=======
+		i := i+1.0; **incrementar o i pra sair do While precisa ser 1.0 por ser float
+>>>>>>> branch 'master' of https://github.com/kenethy/Compiladores
     }
 }
