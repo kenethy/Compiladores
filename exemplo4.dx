@@ -7,9 +7,9 @@ proc buscaRaizDe(n - float)entre(min - float)e(max - float) - float {
     raiz := (min+max) / 2.0;  						**proposta de raiz: metade do max e min
     dif := (raiz*raiz) - n;   						**para testar se, com esta suposta raiz, o resultado da maior/menor/igual 
 
-    if ((dif >= -0.0001) and (dif <= 0.0001)) {  	**testa se deu igual, com margem de erro de 4 digitos
+    if ((dif >= -0.000001) and (dif <= 0.000001)) {  	**testa se deu igual, com margem de erro de 4 digitos
         return raiz;
-    } else if (dif < 0.0) { 							**a raiz eh menor do que deveria
+    } else if (dif < 0.0) { 						**a raiz eh menor do que deveria
         return buscaRaizDe(n)entre(raiz)e(max);  	**busca uma maior
     } else {
         return buscaRaizDe(n)entre(min)e(raiz);  	**busca uma menor
@@ -33,10 +33,6 @@ proc main() {
         prnt(' '); prnt(':'); prnt(' ');
         prnt( raizDe(i) );
         prnt('\n');
-<<<<<<< HEAD
-		i := i + 1.0;
-=======
-		i := i+1.0; **incrementar o i pra sair do While precisa ser 1.0 por ser float
->>>>>>> branch 'master' of https://github.com/kenethy/Compiladores
+		i := i+1.0; 								**incrementar o i pra sair do While precisa ser 1.0 por ser float
     }
 }

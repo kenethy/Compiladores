@@ -1,0 +1,96 @@
+
+** busca alguma raiz para n, no intervalo [min; max]
+proc buscaRaizDe(n - float)entre(min - float)e(max - float) - float {
+    var dif - float;
+    var raiz - float;
+
+    raiz := (min+max) / 2.0;  							**proposta de raiz: metade do max e min
+    dif := (raiz*raiz) - n;   							**para testar se, com esta suposta raiz, o resultado da maior/menor/igual 
+
+    if ((dif >= -0.00001) and (dif <= 0.00001)) {  	**testa se deu igual, com margem de erro de 4 digitos
+        return raiz;
+    } else if (dif < 0.0) { 							**a raiz eh menor do que deveria
+        return buscaRaizDe(n)entre(raiz)e(max);  		**busca uma maior
+    } else {
+        return buscaRaizDe(n)entre(min)e(raiz);  		**busca uma menor
+    }
+}
+
+proc raizDe(n - float) - float {
+    if ((n = 0.0) or (n = 1.0)) {
+        return n;
+    } else {
+        return buscaRaizDe(n)entre(0.0)e(n);
+    }
+}
+
+proc calculoX1 (a - float, b - float, c - float, delta - float) - float {
+	var x - float;
+	var raiz - float;
+	var denominador - float;
+	
+	raiz := raizDe(delta);
+	denominador := 2.0 * a;
+	
+	x := -b + raiz;
+	x := x / denominador;
+
+	return x;
+}
+
+proc calculoX2 (a - float, b - float, c - float, delta - float) - float {
+	var x - float;
+	var raiz - float;
+	var denominador - float;
+	
+	raiz := raizDe(delta);
+	denominador := 2.0 * a;
+	
+	x := -b + raiz;
+	x := x / denominador;
+
+	return x;
+}
+
+proc calcDelta (a - float, b - float, c - float) - float{
+	var d - float;
+	var e - float;
+	
+	d := (b * b);
+	e := (4.0 * a * c);
+	d := d - e;
+		
+	return d;
+}
+
+proc main() {
+	var a, b, c - float;
+	var d - float;
+	
+	
+	a := 1.0;
+	b := 15.0;
+	c := 9.0;
+	
+	d := calcDelta(a,b,c);
+	
+	if (d < 0.0) {
+		prnt('D','E','L','T','A',' ');
+		prnt('N','E','G','A','T','I','V','O','\n');
+		prnt('N','A','O',' '); 
+		prnt('E','X','I','S','T','E',' '); 
+		prnt('R','A','I','Z','E','S','\n');
+	}
+	
+	else {
+		d := calculoX1(a, b, c, d);
+		prnt('X','1',':'); 
+		prnt(d); 
+		prnt('\n');
+		
+		d := calculoX2(a, b, c, d);
+		prnt('X','2',':'); 
+		prnt(d);	
+		prnt('\n');	
+	}	
+}

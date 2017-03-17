@@ -34,7 +34,8 @@ public class TestParser {
 //				arquivo = args[0];
 //			}
 
-			lexer = new Lexer(new FileInputStream("exemplo4.dx"));
+			//NOME DO ARQUIVO PARA TESTAR
+			lexer = new Lexer(new FileInputStream("exemplo5.dx"));
 			parser = new Parser(lexer);
 
 			Symbol output = parser.parse();
