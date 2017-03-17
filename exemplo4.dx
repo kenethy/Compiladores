@@ -33,6 +33,7 @@ proc main() {
         prnt(' '); prnt(':'); prnt(' ');
         prnt( raizDe(i) );
         prnt('\n');
+		i := i+1.0; **incrementar o i pra sair do While precisa ser 1.0 por ser float
     }
 }
 

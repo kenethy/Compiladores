@@ -39,13 +39,13 @@ public class Atribuicao implements Comando {
 		int pos = (int) SymbolTable.getInstance().getLocal(identificador);
 		switch (expressao.getTipo()) {
 		case INT:
-			p.printf("\tistore_%d\n\n", pos);
+			p.printf("\tistore %d\n\n", pos);
 			break;
 		case FLOAT:
-			p.printf("\tfstore_%d\n\n", pos);
+			p.printf("\tfstore %d\n\n", pos);
 			break;
 		case CHAR:
-			p.printf("\tistore_%d\n\n", pos);
+			p.printf("\tistore %d\n\n", pos);
 			break;
 		}
 		return null;

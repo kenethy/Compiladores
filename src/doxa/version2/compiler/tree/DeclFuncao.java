@@ -71,9 +71,9 @@ public class DeclFuncao implements DeclGlobal {
 			}
 		}
 		if (nomesParams.getId().equals("main")) {
-			p.print("\n.method public static main([Ljava/lang/String;)V\n\t.limit locals 10\n\t.limit stack 10\n\n");
+			p.print("\n\n.method public static main([Ljava/lang/String;)V\n\t.limit locals 10\n\t.limit stack 10\n\n");
 		} else {
-			p.printf("\n.method public static %s(%s)%s\n\t.limit locals 10\n\t.limit stack 10\n\n", nomesParams.getId(),
+			p.printf("\n\n.method public static %s(%s)%s\n\t.limit locals 10\n\t.limit stack 10\n\n", nomesParams.getId(),
 					nomesParams.getTipoCodigo(), t);
 		}
 		nomesParams.gerarCodigo(p);
